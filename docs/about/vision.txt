@@ -1,0 +1,19 @@
+######
+Vision
+######
+
+`django-confit` has been created with the following concepts in mind:
+
+* Local configuration should not live in code. Altering ``sys.path`` or putting
+  local settings module within code is not a good practice. Moreover, code
+  should not vary from one environment to another.
+
+* Environment variables are not enough to manage settings. You can load
+  settings from environment variables, but you can also do it from files. Files
+  have many benefits (backup, version control...).
+
+* Settings imported from external locations should be validated.
+
+* Application should expose the full list of settings they use.
+
+* Documentation about applications settings should be auto-generated.

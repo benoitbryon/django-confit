@@ -1,0 +1,26 @@
+# Local binaries.
+/bin
+
+# Libraries.
+/lib/
+
+# Data files.
+/var/
+
+# Python files.
+*.pyc
+*.pyo
+*.egg-info
+
+# Tox files.
+/.tox/
+
+# Virtualenv files.
+/build/
+/dist/
+/local/
+/include/
+/share/
+
+# Editors' temporary buffers.
+.*.swp

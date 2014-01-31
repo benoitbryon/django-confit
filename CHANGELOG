@@ -1,0 +1,19 @@
+Changelog
+=========
+
+This document describes changes between past releases. For information about
+future releases, check `milestones`_ and :doc:`/about/vision`.
+
+
+O.1 (unreleased)
+----------------
+
+- Introduced ``DjangoConfigurationSchema``.
+- Introduced configuration loading functions.
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`milestones`: https://github.com/benoitbryon/django-confit/issues/milestones

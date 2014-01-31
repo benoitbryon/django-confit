@@ -1,0 +1,11 @@
+###################
+About django-confit
+###################
+
+.. toctree::
+
+   vision
+   alternatives
+   license
+   authors
+   changelog

@@ -1,0 +1,36 @@
+#################################
+Alternatives and related projects
+#################################
+
+This document presents other projects that provide similar or complementary
+functionalities. It focuses on differences with django-confit.
+
+As a matter of fact, there are many projects related to configuration on PyPI:
+
+* http://pypi.python.org/pypi?%3Aaction=search&term=config
+* https://pypi.python.org/pypi?%3Aaction=search&term=django%20conf
+
+
+*****************
+django-configglue
+*****************
+
+`django-configglue`_ inspired `django-confit`: it covers both loading and
+validation of settings. `django-configglue` is tied to INI files. The schemas
+look less powerful than those provided by `colander`_.
+
+
+********
+ConfigIt
+********
+
+`ConfigIt`_ can load settings from various formats.
+
+
+.. rubric:: References
+
+.. target-notes::
+
+.. _`django-configglue`: https://pypi.python.org/pypi/django-configglue
+.. _`colander`: https://pypi.python.org/pypi/colander/
+.. _`ConfigIt`: https://pypi.python.org/pypi/ConfigIt/

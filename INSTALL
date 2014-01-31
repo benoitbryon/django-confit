@@ -1,0 +1,19 @@
+#######
+Install
+#######
+
+.. note::
+
+   If you want to install a development environment, please see
+   :doc:`/contribute`.
+
+System requirements:
+
+* Python 2.7 or 3.3
+
+Install the package with your favorite Python installer. As an example, with
+pip:
+
+.. code:: sh
+
+   pip install django-confit
