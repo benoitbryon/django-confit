@@ -54,5 +54,5 @@ Ressources
 * PyPI page: 
 * Code repository: https://github.com/benoitbryon/django-confit
 * Bugtracker: https://github.com/benoitbryon/django-confit/issues
-* Continuous integration:
+* Continuous integration: https://travis-ci.org/benoitbryon/django-confit
 * Roadmap: https://github.com/benoitbryon/django-confit/issues/milestones
