@@ -180,7 +180,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         default=global_settings.CSRF_COOKIE_PATH,
     )
     CSRF_COOKIE_SECURE = colander.SchemaNode(
-        colander.String(),
+        colander.Boolean(),
         missing=global_settings.CSRF_COOKIE_SECURE,
         default=global_settings.CSRF_COOKIE_SECURE,
     )
