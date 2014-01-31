@@ -7,6 +7,21 @@ from django.contrib import messages
 import colander
 
 
+class TupleOrNone(colander.Tuple):
+    def _validate(self, node, value):
+        """Accept None as a valid value."""
+        if value is None:
+            return colander.null
+        else:
+            return super(TupleOrNone, self)._validate(node, value)
+
+    def _impl(self, node, value, callback):
+        if value is colander.null or value is None:
+            return colander.null
+        else:
+            return super(TupleOrNone, self)._impl(node, value, callback)
+
+
 class Django1_5_5ConfigurationSchema(colander.MappingSchema):
     """Schema for Django 1.5.5 built-in settings."""
     ABSOLUTE_URL_OVERRIDES = colander.SchemaNode(
@@ -81,7 +96,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
             colander.SchemaNode(
                 colander.Mapping(unknown='raise'),
                 name='default',
-                missing=None,
+                missing=colander.drop,
                 *[
                     colander.SchemaNode(
                         colander.String(),
@@ -92,37 +107,37 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
                     colander.SchemaNode(
                         colander.String(),
                         name='KEY_FUNCTION',
-                        missing='',
+                        missing=colander.drop,
                         default='',
                     ),
                     colander.SchemaNode(
                         colander.String(),
                         name='KEY_PREFIX',
-                        missing='',
+                        missing=colander.drop,
                         default='',
                     ),
                     colander.SchemaNode(
                         colander.String(),
                         name='LOCATION',
-                        missing='',
+                        missing=colander.drop,
                         default='',
                     ),
                     colander.SchemaNode(
                         colander.Mapping(unknown='preserve'),
                         name='OPTIONS',
-                        missing=None,
-                        default=None,
+                        missing=colander.drop,
+                        default={},
                     ),
                     colander.SchemaNode(
                         colander.Integer(),
                         name='TIMEOUT',
-                        missing=300,
+                        missing=colander.drop,
                         default=300,
                     ),
                     colander.SchemaNode(
                         colander.String(),
                         name='VERSION',
-                        missing=1,
+                        missing=colander.drop,
                         default=1,
                     ),
                 ]
@@ -532,7 +547,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         default=global_settings.LANGUAGES,
         *[
             colander.SchemaNode(
-                colander.Tuple(),
+                colander.List(),
                 *[
                     colander.SchemaNode(colander.String()),
                     colander.SchemaNode(colander.String()),
@@ -679,16 +694,12 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         default=colander.null,
     )
     SECURE_PROXY_SSL_HEADER = colander.SchemaNode(
-        colander.Tuple(),
+        TupleOrNone(),
         missing=global_settings.SECURE_PROXY_SSL_HEADER,
         default=global_settings.SECURE_PROXY_SSL_HEADER,
         *[
-            colander.SchemaNode(
-                colander.String(),
-            ),
-            colander.SchemaNode(
-                colander.String(),
-            ),
+            colander.SchemaNode(colander.String()),
+            colander.SchemaNode(colander.String()),
         ]
     )
     SEND_BROKEN_LINK_EMAILS = colander.SchemaNode(
