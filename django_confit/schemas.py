@@ -33,7 +33,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.ADMIN_FOR,
         default=global_settings.ADMIN_FOR,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -41,10 +41,10 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.ADMINS,
         default=global_settings.ADMINS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.Tuple(),
-                *[
+                children=[
                     colander.SchemaNode(colander.String()),
                     colander.SchemaNode(
                         colander.String(),
@@ -58,7 +58,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.ALLOWED_HOSTS,
         default=global_settings.ALLOWED_HOSTS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -66,7 +66,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.ALLOWED_INCLUDE_ROOTS,
         default=global_settings.ALLOWED_INCLUDE_ROOTS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -79,7 +79,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.AUTHENTICATION_BACKENDS,
         default=global_settings.AUTHENTICATION_BACKENDS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -92,12 +92,12 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Mapping(unknown='preserve'),
         missing=global_settings.CACHES,
         default=global_settings.CACHES,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.Mapping(unknown='raise'),
                 name='default',
                 missing=colander.drop,
-                *[
+                children=[
                     colander.SchemaNode(
                         colander.String(),
                         name='BACKEND',
@@ -193,12 +193,12 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Mapping(unknown='preserve'),
         missing=colander.required,
         default=colander.null,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.Mapping(unknown='raise'),
                 name='default',
                 missing=None,
-                *[
+                children=[
                     colander.SchemaNode(
                         colander.String(),
                         name='ENGINE',
@@ -258,7 +258,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
                         name='TEST_DEPENDENCIES',
                         missing=['default'],
                         default=['default'],
-                        *[
+                        children=[
                             colander.SchemaNode(colander.String()),
                         ]
                     ),
@@ -318,7 +318,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.DATABASE_ROUTERS,
         default=global_settings.DATABASE_ROUTERS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -333,7 +333,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.DATE_INPUT_FORMATS,
         default=global_settings.DATE_INPUT_FORMATS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -348,7 +348,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.DATETIME_INPUT_FORMATS,
         default=global_settings.DATETIME_INPUT_FORMATS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -409,7 +409,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.DISALLOWED_USER_AGENTS,
         default=global_settings.DISALLOWED_USER_AGENTS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -464,7 +464,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.FILE_UPLOAD_HANDLERS,
         default=global_settings.FILE_UPLOAD_HANDLERS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -494,7 +494,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.FIXTURE_DIRS,
         default=global_settings.FIXTURE_DIRS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -509,7 +509,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.IGNORABLE_404_URLS,
         default=global_settings.IGNORABLE_404_URLS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -519,7 +519,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=colander.required,
         default=colander.null,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -527,7 +527,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.INTERNAL_IPS,
         default=global_settings.INTERNAL_IPS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -545,10 +545,10 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.LANGUAGES,
         default=global_settings.LANGUAGES,
-        *[
+        children=[
             colander.SchemaNode(
-                colander.List(),
-                *[
+                colander.Tuple(),
+                children=[
                     colander.SchemaNode(colander.String()),
                     colander.SchemaNode(colander.String()),
                 ]
@@ -559,7 +559,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.LOCALE_PATHS,
         default=global_settings.LOCALE_PATHS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -592,10 +592,10 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.MANAGERS,
         default=global_settings.MANAGERS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.Tuple(),
-                *[
+                children=[
                     colander.SchemaNode(colander.String()),
                     colander.SchemaNode(
                         colander.String(),
@@ -624,7 +624,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Mapping(unknown='preserve'),
         missing=messages.DEFAULT_TAGS,
         default=messages.DEFAULT_TAGS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -634,7 +634,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.MIDDLEWARE_CLASSES,
         default=global_settings.MIDDLEWARE_CLASSES,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -652,7 +652,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.PASSWORD_HASHERS,
         default=global_settings.PASSWORD_HASHERS,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -672,7 +672,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.PROFANITIES_LIST,
         default=global_settings.PROFANITIES_LIST,
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -697,7 +697,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         TupleOrNone(),
         missing=global_settings.SECURE_PROXY_SSL_HEADER,
         default=global_settings.SECURE_PROXY_SSL_HEADER,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
             colander.SchemaNode(colander.String()),
         ]
@@ -711,7 +711,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Mapping(unknown='preserve'),
         missing=colander.drop,
         default={},
-        *[
+        children=[
             colander.SchemaNode(
                 colander.String(),
             ),
@@ -821,7 +821,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.TEMPLATE_CONTEXT_PROCESSORS,
         default=global_settings.TEMPLATE_CONTEXT_PROCESSORS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -834,7 +834,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.TEMPLATE_DIRS,
         default=global_settings.TEMPLATE_DIRS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -842,7 +842,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.TEMPLATE_LOADERS,
         default=global_settings.TEMPLATE_LOADERS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
@@ -870,7 +870,7 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         colander.Sequence(),
         missing=global_settings.TIME_INPUT_FORMATS,
         default=global_settings.TIME_INPUT_FORMATS,
-        *[
+        children=[
             colander.SchemaNode(colander.String()),
         ]
     )
