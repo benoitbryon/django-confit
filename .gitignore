@@ -21,6 +21,3 @@
 /local/
 /include/
 /share/
-
-# Editors' temporary buffers.
-.*.swp

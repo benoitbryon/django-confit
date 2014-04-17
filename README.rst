@@ -50,8 +50,8 @@ Let's compute configuration from various locations in ``settings.py``:
 Ressources
 **********
 
-* Documentation: 
-* PyPI page: 
+* Documentation: https://django-confit.readthedocs.org
+* PyPI page: https://pypi.python.org/pypi/django-confit/
 * Code repository: https://github.com/benoitbryon/django-confit
 * Bugtracker: https://github.com/benoitbryon/django-confit/issues
 * Continuous integration: https://travis-ci.org/benoitbryon/django-confit

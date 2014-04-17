@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Python packaging."""
 import os
@@ -7,20 +8,23 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
-here = os.path.abspath(os.path.dirname(__file__))
-
-
 class Tox(TestCommand):
+    """Test command that runs tox."""
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
 
     def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
-        import tox
+        import tox  # import here, cause outside the eggs aren't loaded.
         errno = tox.cmdline(self.test_args)
         sys.exit(errno)
+
+
+#: Absolute path to directory containing setup.py file.
+here = os.path.abspath(os.path.dirname(__file__))
+#: Boolean, ``True`` if environment is running Python version 2.
+IS_PYTHON2 = sys.version_info[0] == 2
 
 
 NAME = 'django-confit'
@@ -28,8 +32,23 @@ README = open(os.path.join(here, 'README.rst')).read()
 DESCRIPTION = 'Django settings loaders and validators, with local flavour.'
 VERSION = open(os.path.join(here, 'VERSION')).read().strip()
 AUTHOR = u'Benoît Bryon'
-AUTHOR_EMAIL = 'benoit@marmelune.net'
-URL = 'https://github.com/benoitbryon/%s' % NAME
+EMAIL = 'benoit@marmelune.net'
+URL = 'https://django-confit.readthedocs.org'
+CLASSIFIERS = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3.3",
+    "Framework :: Django",
+],
+KEYWORDS = [
+    'configuration',
+    'settings',
+    'schema',
+    'validation',
+    'yaml',
+    'json',
+]
 PACKAGES = [NAME.replace('-', '_')]
 REQUIREMENTS = [
     'colander',
@@ -38,26 +57,15 @@ REQUIREMENTS = [
     'setuptools',
     'six',
 ]
-try:
-    from unittest import mock  # NoQA
-except ImportError:
-    REQUIREMENTS.append('mock')
+if IS_PYTHON2:
+    REQUIREMENTS.extend(['mock'])
 ENTRY_POINTS = {}
-CLASSIFIERS = [
-    "License :: OSI Approved :: BSD License",
-    "Development Status :: 1 - Planning",
-    "Programming Language :: Python :: 2.7",
-    "Programming Language :: Python :: 3.3",
-    "Framework :: Django",
-],
-KEYWORDS = ['configuration', 'settings', 'schema', 'validation', 'yaml',
-            'json']
 LICENSE = 'BSD'
 TEST_REQUIREMENTS = ['tox']
 CMDCLASS = {'test': Tox}
 
 
-if __name__ == '__main__':  # Don't run setup() when we import this module.
+if __name__ == '__main__':  # Do not run setup() when we import this module.
     setup(
         name=NAME,
         version=VERSION,
@@ -66,8 +74,9 @@ if __name__ == '__main__':  # Don't run setup() when we import this module.
         classifiers=CLASSIFIERS,
         keywords=' '.join(KEYWORDS),
         author=AUTHOR,
-        author_email=AUTHOR_EMAIL,
+        author_email=EMAIL,
         url=URL,
+        license=LICENSE,
         packages=PACKAGES,
         include_package_data=True,
         zip_safe=False,

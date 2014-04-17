@@ -11,7 +11,7 @@ Contents
    
    install
    about/index
-   contribute
+   contributing
 
 
 ******************
