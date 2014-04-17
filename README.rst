@@ -23,6 +23,7 @@ Let's compute configuration from various locations in ``settings.py``:
 .. code:: python
 
    import os
+   import json
 
    from django_confit import DjangoConfigurationSchema
    from django_confit import settings_from_module
@@ -33,12 +34,13 @@ Let's compute configuration from various locations in ``settings.py``:
        pass  # Nothing specific to the project.
 
 
-   # Read settings.
+   # Load settings.
    raw_settings = {}
    raw_settings.update(settings_from_module('myproject.default_settings'))
+   raw_settings.update(settings_from_string_mapping(json.loads('/etc/myproject.json'))
    raw_settings.update(settings_from_string_mapping(os.environ, prefix='MYPROJECT_')
 
-   # Clean settings.
+   # Validate and clean settings.
    schema = MyProjectConfigurationSchema()
    cleaned_settings = schema.deserialize(raw_settings)
 
