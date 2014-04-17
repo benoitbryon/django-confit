@@ -1,25 +1,10 @@
-# -*- coding: utf-8 -*-
-"""Schemas for configuration validation."""
-import django
+"""Configuration schemas for the 1.5 branch."""
 from django.conf import global_settings
 from django.contrib import messages
 
 import colander
 
-
-class TupleOrNone(colander.Tuple):
-    def _validate(self, node, value):
-        """Accept None as a valid value."""
-        if value is None:
-            return colander.null
-        else:
-            return super(TupleOrNone, self)._validate(node, value)
-
-    def _impl(self, node, value, callback):
-        if value is colander.null or value is None:
-            return colander.null
-        else:
-            return super(TupleOrNone, self)._impl(node, value, callback)
+from django_confit.utils.colander import TupleOrNone
 
 
 class Django1_5_5ConfigurationSchema(colander.MappingSchema):
@@ -929,16 +914,3 @@ class Django1_5_5ConfigurationSchema(colander.MappingSchema):
         missing=global_settings.X_FRAME_OPTIONS,
         default=global_settings.X_FRAME_OPTIONS,
     )
-
-
-current_schema_name = 'Django{version}ConfigurationSchema'.format(
-    version=django.get_version().replace('.', '_'))
-
-
-#: Schema for Django  settings (current/installed version)."""
-try:
-    DjangoConfigurationSchema = globals()[current_schema_name]
-except KeyError:
-    raise NotImplementedError(
-        'No support for Django version {version}'.format(
-            version=django.get_version()))
