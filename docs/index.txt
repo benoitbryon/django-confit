@@ -13,6 +13,7 @@ Contents
    loaders
    validation
    schemas
+   third-party
    about/index
    contributing
 
