@@ -11,6 +11,8 @@ Contents
    
    install
    loaders
+   validation
+   schemas
    about/index
    contributing
 
@@ -22,3 +24,8 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+.. rubric:: Notes & references
+
+.. target-notes::

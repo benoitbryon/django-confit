@@ -1,4 +1,6 @@
 """Schemas for configuration validation."""
+import os
+
 import django
 
 from django_confit.utils.importlib import import_member
@@ -31,19 +33,56 @@ def get_django_schema_class():
 DjangoConfigurationSchema = get_django_schema_class()
 
 
+def guess_project():
+    """Return project's package name, computed from DJANGO_SETTINGS_MODULE.
+
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
+    >>> guess_project()
+    'myproject'
+
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.demo.settings'
+    >>> guess_project()
+    'myproject.demo'
+
+    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+    >>> guess_project()
+    ''
+
+    """
+    parts = os.environ.get('DJANGO_SETTINGS_MODULE', '').split('.')
+    if parts:
+        parts.pop()
+        return '.'.join(parts)
+
+
 def composite_schema_class(installed_apps):
     """Return colander schema class for current Django and installed apps.
 
     Tries to automatically load schemas of applications either implemented by
-    apps themselves, or by django_confit.
+    project (local overrides), or by apps themselves, or by django_confit:
+
+    1. ``<PROJECT>.settings_schemas.<APP>.ConfigurationSchema`` where
+       ``<PROJECT>`` is the package part of ``DJANGO_SETTINGS_MODULE``
+       environment variable.
+
+    2. ``<APP>.settings_schemas.ConfigurationSchema``
+
+    3. ``django_confit.schemas.<APP>.ConfigurationSchema``
 
     """
     bases = [DjangoConfigurationSchema]
+    project = guess_project()
     for app in installed_apps:
-        app_path = '{app}.settings_schemas.ConfigurationSchema'.format(app=app)
-        confit_path = 'django_confit.schemas.{app}.ConfigurationSchema' \
-                      .format(app=app)
-        for schema_path in [app_path, confit_path]:
+        locations = []
+        if project:
+            locations.append(
+                '{project}.settings_schemas.{app}.ConfigurationSchema'
+                .format(app=app, project=project))
+        locations.append(
+            '{app}.settings_schemas.ConfigurationSchema'.format(app=app))
+        locations.append(
+            'django_confit.schemas.{app}.ConfigurationSchema'.format(app=app))
+        for schema_path in locations:
             try:
                 bases.append(import_member(schema_path))
             except ImportError:

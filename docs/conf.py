@@ -190,9 +190,15 @@ htmlhelp_basename = u'{project}doc'.format(project=project_slug)
 # -- Options for sphinx.ext.intersphinx ---------------------------------------
 
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/2.7', None),
-    'django': ('http://docs.djangoproject.com/en/1.5/',
-               'http://docs.djangoproject.com/en/1.5/_objects/'),
+    'python': (
+        'http://docs.python.org/2.7',
+        None),
+    'django': (
+        'http://docs.djangoproject.com/en/1.5/',
+        'http://docs.djangoproject.com/en/1.5/_objects/'),
+    'colander': (
+        'http://docs.pylonsproject.org/projects/colander/en/latest/',
+        None),
 }
 
 # -- Options for LaTeX output --------------------------------------------------

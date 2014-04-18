@@ -2,12 +2,16 @@
 Load configuration
 ##################
 
-As a Django user, you manage configuration as you like: as Python modules, as
-JSON or YAML files, as environment variables... Do whatever integrates best
+**As a Django user**, you manage configuration as you like: as Python modules,
+as JSON or YAML files, as environment variables... Do whatever integrates best
 with your deployment workflow and your team.
 
-This document explains how `django-confit` can help you load configuration from
-various locations and formats.
+**As a non Django user** (such as a member of the Ops team), you may appreciate
+putting configuration in configuration files or in environment variables. Not
+in Python code.
+
+This document explains how `django-confit` can help Django users load
+configuration from various locations and formats.
 
 .. py:module:: django_confit.loaders
 

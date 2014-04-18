@@ -2,6 +2,8 @@
 About django-confit
 ###################
 
+This section is about `django-confit` project itself.
+
 .. toctree::
 
    vision

@@ -1,0 +1,30 @@
+################
+Validate schemas
+################
+
+**As a Django user**, once you have :doc:`loaded configuration <loaders>`, you
+want to make sure it is valid. It is a must-have feature when the configuration
+comes from various locations. Or when it has been written by several users.
+
+**As a non Django user** (such as a member of the Ops team, who deploys and
+configure services), you do **not** want to be prosecuted because you made a
+typo in configuration. You think applications should validate the configuration
+before they actually use it, and report errors with a readable output.
+
+This section explains how `django-confit` helps Django users validate
+configuration.
+
+
+*****************
+validate_settings
+*****************
+
+.. autofunction:: django_confit.schemas.validate_settings
+
+
+*************
+Low-level API
+*************
+
+Use :meth:`~colander.SchemaNode.deserialize` method of `Colander` schemas:
+http://docs.pylonsproject.org/projects/colander/en/latest/basics.html#deserialization

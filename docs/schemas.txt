@@ -1,0 +1,71 @@
+###########################
+Write configuration schemas
+###########################
+
+**As a Django application developer**, you want to expose configuration
+directives. You want to make sure your application is well configured. As an
+example, you appreciate to mark some directives as required, and to provide
+default values for optional ones. But you do not want to re-invent the wheel
+about validation.
+
+**As a Django user**, you do not want to bother about application configuration
+schemas. You just want it loaded when you register the application in
+``INSTALLED_APPS``.
+
+This sections explains how to create and register configuration schemas with
+`django-confit`.
+
+
+*******************************************
+Create settings_schemas.ConfigurationSchema
+*******************************************
+
+:func:`~django_confit.schemas.validate_settings` automatically loads schemas
+from ``INSTALLED_APPS`` setting. For each item in ``INSTALLED_APPS``, it tries
+to import:
+
+1. ``settings_schemas.<APP>.ConfigurationSchema`` in current package (allows
+   local overrides)
+
+2. ``<APP>.settings_schemas.ConfigurationSchema``
+
+3. ``django_confit.schemas.<APP>.ConfigurationSchema``
+
+
+******************************
+Create a schema using Colander
+******************************
+
+See:
+
+* `colander's documentation`_
+* `django-confit's builtin schemas`_
+
+.. warning::
+
+   In `django-confit` code, you will see some hacks around versions of
+   applications. Yes, they are **hacks**. They are necessary because from the
+   `django-confit` point of view, we do not know which version of the
+   application is actually installed. So we have to write conditionals in order
+   to support them as well as possible... But it is a true pain.
+
+   **Just imagine the schema lives within the third-party application
+   itself...** As a consequence:
+
+   * one schema is enough. No need to manage concurrent schemas. The one for
+     the current version is enough.
+
+   * the schema is updated along the application. It is part of the
+     application's release process.
+
+   * as an user, you do not have to find or write a schema for the application.
+     There is an official one! You install the app, you get the schema!
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`colander's documentation`: http://docs.pylonsproject.org/projects/colander
+.. _`django-confit's builtin schemas`:
+   https://github.com/benoitbryon/django-confit/tree/master/django_confit/schemas 
