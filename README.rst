@@ -2,49 +2,52 @@
 django-confit
 #############
 
-``django-confit`` makes it easy to manage Django configuration:
+`django-confit` eases Django configuration management.
 
-* load settings from various locations: modules, files, environment;
+As a Django user:
 
-* validate settings at runtime: do not run the server if configuration is
-  broken;
+* you write the settings as you like: Python modules, environment variables,
+  JSON, YAML... `django-confit` helps you load them all.
 
-* validate settings on demand: diagnose configuration issues;
+* `django-confit` validates the settings, i.e. it tells you if some directive
+  is missing, has wrong format...
 
-* register configuration schemas for your third-party apps and libraries.
+As a Django application developer:
+
+* you write configuration schemas for your application, using `django-confit`'s
+  toolkit and conventions.
+
+* `django-confit` helps you document your application's specific
+  configuration.
 
 
 *******
 Example
 *******
 
-Let's compute configuration from various locations in ``settings.py``:
+In a project's ``settings.py`` file, let's load configuration from various
+locations then validate them:
 
 .. code:: python
 
    import os
    import json
 
-   from django_confit import DjangoConfigurationSchema
    from django_confit import settings_from_module
    from django_confit import settings_from_string_mapping
-
-
-   class MyProjectConfigurationSchema(DjangoConfigurationSchema):
-       pass  # Nothing specific to the project.
+   from django_confit import validate_settings
 
 
    # Load settings.
    raw_settings = {}
    raw_settings.update(settings_from_module('myproject.default_settings'))
-   raw_settings.update(settings_from_string_mapping(json.loads('/etc/myproject.json'))
+   raw_settings.update(settings_from_string_mapping(json.load(open('/etc/myproject.json')))
    raw_settings.update(settings_from_string_mapping(os.environ, prefix='MYPROJECT_')
 
    # Validate and clean settings.
-   schema = MyProjectConfigurationSchema()
-   cleaned_settings = schema.deserialize(raw_settings)
+   cleaned_settings = django_confit.validate_settings(raw_settings)
 
-   # Update globals, since that's what Django expects.
+   # Update globals, because that's the way Django uses DJANGO_SETTINGS_MODULE.
    globals().update(cleaned_settings)
 
 
