@@ -8,8 +8,11 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 O.1 (unreleased)
 ----------------
 
-- Introduced ``DjangoConfigurationSchema``.
-- Introduced configuration loading functions.
+- Introduced ``DjangoConfigurationSchema``, with implementation for Django
+  1.5.5 and 1.6.2.
+- Introduced configuration loading utilities:
+  ``settings_from_module``, ``settings_from_file``,
+  ``settings_from_string_mapping``.
 
 
 .. rubric:: Notes & references
