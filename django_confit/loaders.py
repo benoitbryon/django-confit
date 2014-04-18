@@ -18,11 +18,19 @@ import yaml
 def load_mapping(input, prefix=''):
     """Convert mapping of {key: string} to {key: complex type}.
 
-    Simple key-value stores (flat mappings) are supported:
+    This function makes it possible (and easy) to load complex types from
+    single-level key-value stores, such as environment variables or INI files.
+
+    Of course, both flat and nested mappings are supported:
 
     >>> flat_mapping = {'DEBUG': 'True', 'SECRET_KEY': 'not a secret'}
     >>> output = load_mapping(flat_mapping)
     >>> output == flat_mapping
+    True
+
+    >>> nested_mapping = {'DATABASES': {'USER': 'me', 'HOST': 'localhost'}}
+    >>> output = load_mapping(nested_mapping)
+    >>> output == nested_mapping
     True
 
     Values can be complex types (sequences, mappings) using JSON or YAML.
@@ -84,7 +92,7 @@ def load_file(file_obj):
 
 
 def load_module(module_path):
-    """Import settings from module's globals and return them as a dict.
+    """Return module's globals as a dict.
 
     >>> settings = load_module('django.conf.global_settings')
     >>> settings['DATABASES']
