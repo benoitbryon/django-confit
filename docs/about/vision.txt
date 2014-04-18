@@ -12,7 +12,7 @@ Vision
   settings from environment variables, but you can also do it from files. Files
   have many benefits (backup, version control...).
 
-* Settings imported from external locations should be validated.
+* Settings imported from external locations should (always) be validated.
 
 * Application should expose the full list of settings they use.
 

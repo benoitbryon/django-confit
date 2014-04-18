@@ -26,9 +26,9 @@ Example
 *******
 
 In a project's ``settings.py`` file, let's load configuration from various
-locations then validate them:
+locations, then validate it:
 
-.. code:: python
+.. code-block:: python
 
    import os
 
@@ -47,6 +47,47 @@ locations then validate them:
    globals().update(cleaned_settings)
 
 
+**************
+Project status
+**************
+
+Today, `django-confit` is a proof of concept:
+
+* loading settings is nice and easy.
+
+* validating configuration is easy... provided you have the schemas.
+
+* creating configuration schemas is verbose. It uses `colander`_ which has nice
+  features, but may not be the definitive option.
+
+* generating documentation from schemas is not implemented.
+
+**The main limitation is that schemas are mandatory.** If some configuration
+directive is not registered in a schema, it will not be present in validation
+output. It means that, if you install a new third-party Django application,
+you need the configuration schema for this application, else its settings will
+not pass validation. **So the most-wanted contribution is submitting
+configuration schemas for third-party applications.**
+
+Notice that this behaviour is a wanted feature. As `django-confit` author, I
+think **libraries should always provide a schema for the settings they use**.
+I do not pretend `django-confit` should be THE answer. I just think that, if
+schemas were widely adopted by the Django community, configuration would be
+easier to manage.
+
+`django-confit` does not pretend to be the ultimate configuration management
+app for Django. Its goal is to show how some issues could be resolved, and to
+highlight the benefits. `django-confit` is a proposal. If you like its
+concepts, then you can:
+
+* use `django-confit` of course!
+
+* discuss, spread the word, send feedback.
+
+* improve code. Help around configuration schemas of third-party apps would be
+  appreciated.
+
+
 **********
 Ressources
 **********
@@ -57,3 +98,6 @@ Ressources
 * Bugtracker: https://github.com/benoitbryon/django-confit/issues
 * Continuous integration: https://travis-ci.org/benoitbryon/django-confit
 * Roadmap: https://github.com/benoitbryon/django-confit/issues/milestones
+
+
+.. _`colander`: https://pypi.python.org/pypi/colander/
