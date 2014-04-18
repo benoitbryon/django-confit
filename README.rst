@@ -31,18 +31,14 @@ locations then validate them:
 .. code:: python
 
    import os
-   import json
 
-   from django_confit import settings_from_module
-   from django_confit import settings_from_string_mapping
-   from django_confit import validate_settings
-
+   import django_confit
 
    # Load settings.
    raw_settings = {}
-   raw_settings.update(settings_from_module('myproject.default_settings'))
-   raw_settings.update(settings_from_string_mapping(json.load(open('/etc/myproject.json')))
-   raw_settings.update(settings_from_string_mapping(os.environ, prefix='MYPROJECT_')
+   raw_settings.update(django_confit.load_module('myproject.default_settings'))
+   raw_settings.update(django_confit.load_file(open('/etc/myproject.json')))
+   raw_settings.update(django_confit.load_mapping(os.environ, prefix='MYPROJECT_')
 
    # Validate and clean settings.
    cleaned_settings = django_confit.validate_settings(raw_settings)

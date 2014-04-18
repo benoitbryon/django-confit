@@ -15,13 +15,13 @@ import six
 import yaml
 
 
-def settings_from_string_mapping(input, prefix=''):
+def load_mapping(input, prefix=''):
     """Convert mapping of {key: string} to {key: complex type}.
 
     Simple key-value stores (flat mappings) are supported:
 
     >>> flat_mapping = {'DEBUG': 'True', 'SECRET_KEY': 'not a secret'}
-    >>> output = settings_from_string_mapping(flat_mapping)
+    >>> output = load_mapping(flat_mapping)
     >>> output == flat_mapping
     True
 
@@ -31,14 +31,14 @@ def settings_from_string_mapping(input, prefix=''):
     >>> nested_mapping = {
     ...     'DATABASES.yaml': 'ENGINE: sqlite3',
     ... }
-    >>> output = settings_from_string_mapping(nested_mapping)
+    >>> output = load_mapping(nested_mapping)
     >>> output['DATABASES'] == {'ENGINE': 'sqlite3'}
     True
 
     You can use optional ``prefix`` argument to load only a subset of mapping:
 
     >>> mapping = {'YES_ONE': '1', 'NO_TWO': '2'}
-    >>> settings_from_string_mapping(mapping, prefix='YES_')
+    >>> load_mapping(mapping, prefix='YES_')
     {'ONE': '1'}
 
     """
@@ -55,8 +55,8 @@ def settings_from_string_mapping(input, prefix=''):
     return output
 
 
-def settings_from_file(file_obj):
-    """Return mapping from filename.
+def load_file(file_obj):
+    """Return mapping from file object, using ``name`` attr to guess format.
 
     Supported file formats are JSON and YAML. The lowercase extension is used
     to guess the file type.
@@ -64,7 +64,7 @@ def settings_from_file(file_obj):
     >>> from six.moves import StringIO
     >>> file_obj = StringIO('SOME_LIST: [a, b, c]')
     >>> file_obj.name = 'something.yaml'
-    >>> settings_from_file(file_obj) == {
+    >>> load_file(file_obj) == {
     ...     'SOME_LIST': ['a', 'b', 'c'],
     ... }
     True
@@ -83,12 +83,16 @@ def settings_from_file(file_obj):
                 extensions='", "'.join('.yaml', '.json')))
 
 
-def settings_from_module(module_path):
+def load_module(module_path):
     """Import settings from module's globals and return them as a dict.
 
-    >>> settings = settings_from_module('django.conf.global_settings')
+    >>> settings = load_module('django.conf.global_settings')
     >>> settings['DATABASES']
     {}
+
+    It does not load "protected" and "private" attributes (those with
+    underscores).
+
     >>> '__name__' in settings
     False
 
