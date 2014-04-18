@@ -71,7 +71,7 @@ configuration schemas for third-party applications.**
 
 Notice that this behaviour is a wanted feature. As `django-confit` author, I
 think **libraries should always provide a schema for the settings they use**.
-I do not pretend `django-confit` should be THE answer. I just think that, if
+I do not pretend `django-confit` should be THE answer. I just bet that, if
 schemas were widely adopted by the Django community, configuration would be
 easier to manage.
 
