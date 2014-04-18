@@ -7,7 +7,7 @@ from django_confit.utils.importlib import import_member
 def get_current_schema_class():
     """Return colander schema class for current (installed) Django version."""
     schema_import_path = \
-        'django_confit.schemas.django{major}_{minor}' \
+        'django_confit.schemas.django_{major}_{minor}' \
         '.Django{major}_{minor}_{micro}ConfigurationSchema' \
         .format(
             major=django.VERSION[0],
@@ -21,11 +21,11 @@ def get_current_schema_class():
             'Django version {version} is not supported by django_confit. \n'
             '{exception}'
             .format(
-                schema=schema_import_path,
+                schema_path=schema_import_path,
                 version=django.get_version(),
                 exception=e,
             )
         )
 
 
-DjangoConfigurationSchema = get_current_schema_class
+DjangoConfigurationSchema = get_current_schema_class()

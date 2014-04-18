@@ -1,4 +1,4 @@
-"""Configuration schemas for the 1.5 branch."""
+"""Configuration schemas for the 1.6 branch."""
 import django
 from django.conf import global_settings
 from django.contrib import messages
@@ -8,8 +8,8 @@ import colander
 from django_confit.utils.colander import TupleOrNone
 
 
-if django.VERSION[0] == 1 and django.VERSION[1] == 5:
-    class Django1_5_5ConfigurationSchema(colander.MappingSchema):
+if django.VERSION[0] == 1 and django.VERSION[1] == 6:
+    class Django1_6_2ConfigurationSchema(colander.MappingSchema):
         """Schema for Django 1.5.5 built-in settings."""
         ABSOLUTE_URL_OVERRIDES = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
@@ -136,6 +136,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             missing=global_settings.CACHE_MIDDLEWARE_ALIAS,
             default=global_settings.CACHE_MIDDLEWARE_ALIAS,
         )
+        #: Deprecated in Django 1.6.
         CACHE_MIDDLEWARE_ANONYMOUS_ONLY = colander.SchemaNode(
             colander.Boolean(),
             missing=False,
@@ -155,6 +156,12 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             colander.String(),
             missing=global_settings.CSRF_COOKIE_DOMAIN,
             default=global_settings.CSRF_COOKIE_DOMAIN,
+        )
+        #: New in Django 1.6
+        CSRF_COOKIE_HTTP_ONLY = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.CSRF_COOKIE_HTTPONLY,
+            default=global_settings.CSRF_COOKIE_HTTPONLY,
         )
         CSRF_COOKIE_NAME = colander.SchemaNode(
             colander.String(),
@@ -186,6 +193,27 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
                     name='default',
                     missing=None,
                     children=[
+                        # New in Django 1.6.
+                        colander.SchemaNode(
+                            colander.Boolean(),
+                            name='ATOMIC_REQUESTS',
+                            missing=False,
+                            default=False,
+                        ),
+                        # New in Django 1.6.
+                        colander.SchemaNode(
+                            colander.Boolean(),
+                            name='AUTOCOMMIT',
+                            missing=True,
+                            default=True,
+                        ),
+                        # New in Django 1.6.
+                        colander.SchemaNode(
+                            colander.Integer(),
+                            name='CONN_MAX_AGE',
+                            missing=0,
+                            default=0,
+                        ),
                         colander.SchemaNode(
                             colander.String(),
                             name='ENGINE',
@@ -689,6 +717,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
                 colander.SchemaNode(colander.String()),
             ]
         )
+        # Deprecated in Django 1.6.
         SEND_BROKEN_LINK_EMAILS = colander.SchemaNode(
             colander.Boolean(),
             missing=global_settings.SEND_BROKEN_LINK_EMAILS,
@@ -866,6 +895,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             missing=global_settings.TIME_ZONE,
             default=global_settings.TIME_ZONE,
         )
+        # Deprecated in Django 1.6
         TRANSACTIONS_MANAGED = colander.SchemaNode(
             colander.Boolean(),
             missing=global_settings.TRANSACTIONS_MANAGED,
