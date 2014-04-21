@@ -5,27 +5,7 @@ This document describes changes between past releases. For information about
 future releases, check `milestones`_ and :doc:`/about/vision`.
 
 
-0.3 (unreleased)
-----------------
-
-- Nothing changed yet.
-
-
-0.2 (2014-04-21)
-----------------
-
-Demo project.
-
-- Feature #7 - Code repository contains a demo project, used for documentation
-  and tests.
-- Feature #9 - Demo project shows how to register a custom configuration
-  schema.
-- Feature #10 - Validate_settings() emits a warning if some directives used in
-  raw settings input are not in cleaned settings output. Helps figure out which
-  schemas are missing.
-
-
-0.1 (2014-04-21)
+0.1 (unreleased)
 ----------------
 
 Proof of concept.
@@ -38,6 +18,16 @@ Proof of concept.
   django-pipeline, django-debug-toolbar, django-nose and raven.
 
 - Introduced configuration loading utilities.
+
+- Feature #7 - Code repository contains a demo project, used for documentation
+  and tests.
+
+- Feature #9 - Demo project shows how to register a custom configuration
+  schema.
+
+- Feature #10 - Validate_settings() emits a warning if some directives used in
+  raw settings input are not in cleaned settings output. Helps figure out which
+  schemas are missing.
 
 
 .. rubric:: Notes & references

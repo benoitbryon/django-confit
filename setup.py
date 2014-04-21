@@ -40,7 +40,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3.3",
     "Framework :: Django",
-],
+]
 KEYWORDS = [
     'configuration',
     'settings',
