@@ -1,4 +1,8 @@
 """Default settings for `django-confit-demo`."""
+CONFIT_SCHEMAS = {
+    'django_confit_demo': 'django_confit_demo.settings_schemas'
+                          '.DjangoConfitDemoConfigurationSchema'
+}
 INSTALLED_APPS = (
     'django_confit_demo',
     'django_nose',

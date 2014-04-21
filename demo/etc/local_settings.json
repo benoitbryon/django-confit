@@ -1,4 +1,5 @@
 {
+  "CONFITDEMO_HELLO": "hello world!",
   "DATABASES": {
     "default": {
       "ENGINE": "django.db.backends.sqlite3",

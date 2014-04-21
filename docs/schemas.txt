@@ -24,6 +24,11 @@ See:
 * `colander's documentation`_
 * `django-confit's builtin schemas`_
 
+Simple example from `custom schemas in django-confit demo project`_:
+
+.. literalinclude:: /../demo/django_confit_demo/settings_schemas.py
+   :language: python
+
 .. warning::
 
    In `django-confit` code, you will see some hacks around versions of
@@ -63,3 +68,5 @@ In `django-confit` itself, make sure the schema can be loaded with
 .. _`colander's documentation`: http://docs.pylonsproject.org/projects/colander
 .. _`django-confit's builtin schemas`:
    https://github.com/benoitbryon/django-confit/tree/master/django_confit/schemas 
+.. _`custom schemas in django-confit demo project`:
+   https://github.com/benoitbryon/django-confit/tree/master/demo/django_confit_demo/settings_schemas.py 
