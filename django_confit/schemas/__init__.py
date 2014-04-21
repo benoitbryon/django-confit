@@ -101,10 +101,8 @@ def composite_schema(installed_apps):
 def validate_settings(raw_settings):
     """Return cleaned settings using schemas collected from INSTALLED_APPS."""
     # Perform early validation on Django's INSTALLED_APPS.
-    django_schema = DjangoConfigurationSchema()
-    django_settings = django_schema.deserialize(raw_settings)
+    installed_apps = raw_settings['INSTALLED_APPS']
     # Create schema instance using INSTALLED_APPS.
-    settings_schema = composite_schema(
-        installed_apps=django_settings['INSTALLED_APPS'])
+    settings_schema = composite_schema(installed_apps=installed_apps)
     # Return cleaned settings.
     return settings_schema.deserialize(raw_settings)
