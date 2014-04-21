@@ -1,0 +1,24 @@
+{% load url from future %}
+<html>
+	<head>
+        <title>django-downloadview demo</title>
+	</head>
+	<body>
+        <h1>Welcome to django-downloadview demo!</h1>
+        <p>Here are some demo links. Browse the code to see how they are implemented</p>
+
+        <h2>Serving files with Django</h2>
+        <p>In the following views, Django streams the files, no optimization
+           has been setup.</p>
+        <ul>
+        </ul>
+
+        <h2>Optimized downloads</h2>
+        <p>In the following views, Django delegates actual streaming to another
+           server, for improved performances.</p>
+        <p>Since nginx and other servers aren't installed on the demo, you
+           will get raw "X-Sendfile" responses. Look at the headers!</p>
+        <ul>
+        </ul>
+    </body>
+</html>

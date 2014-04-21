@@ -1,0 +1,15 @@
+DEBUG: True
+NOSE_ARGS:
+  - "--rednose"
+  - "--verbosity=2"
+  - "--nocapture"
+  - "--with-doctest"
+  - "--no-path-adjustment"
+  - "--all-modules"
+  - "--cover-inclusive"
+  - "--cover-tests"
+  - "--with-coverage"
+  - "--cover-package=django_confit_demo"
+  - "--tests=django_confit_demo"
+TEMPLATE_DEBUG: True
+TEST_RUNNER: django_nose.NoseTestSuiteRunner

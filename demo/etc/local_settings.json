@@ -1,0 +1,10 @@
+{
+  "DATABASES": {
+    "default": {
+      "ENGINE": "django.db.backends.sqlite3",
+      "NAME": "demo.sqlite"
+    }
+  },
+  "DEFAULT_FROM_EMAIL": "demo@example.com",
+  "SECRET_KEY": "fake secret"
+}
