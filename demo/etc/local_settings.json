@@ -6,5 +6,6 @@
     }
   },
   "DEFAULT_FROM_EMAIL": "demo@example.com",
-  "SECRET_KEY": "fake secret"
+  "SECRET_KEY": "fake secret",
+  "UNUSED": "This directive is not used in schemas... You should get a warning"
 }
