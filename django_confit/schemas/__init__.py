@@ -1,4 +1,6 @@
 """Schemas for configuration validation."""
+import warnings
+
 import django
 
 from django_confit.utils.importlib import import_member
@@ -76,5 +78,20 @@ def validate_settings(raw_settings):
     settings_schema = composite_schema(
         installed_apps=installed_apps,
         mapping=schemas_mapping)
-    # Return cleaned settings.
-    return settings_schema.deserialize(raw_settings)
+    # Actually validate settings.
+    cleaned_settings = settings_schema.deserialize(raw_settings)
+    # Highlight differences between raw and cleaned settings.
+    # Warn users when raw settings contain directives that are not used in
+    # schemas.
+    raw_keys = set(raw_settings.keys())
+    cleaned_keys = set(cleaned_settings.keys())
+    unused_keys = raw_keys.difference(cleaned_keys)
+    if unused_keys:
+        warnings.warn(
+            'The following settings are mentioned in your configuration, but '
+            'are not in cleaned settings. They may be missing in '
+            'configuration schemas, or you do not need to set them up: \n'
+            '- {settings}'.format(settings='\n- '.join(unused_keys)),
+            Warning)
+    # Return.
+    return cleaned_settings

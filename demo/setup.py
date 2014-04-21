@@ -23,6 +23,7 @@ CLASSIFIERS = ['Development Status :: 3 - Alpha',
 KEYWORDS = []
 PACKAGES = ['django_confit_demo']
 REQUIREMENTS = [
+    'coverage',
     'django-confit',
     'django-nose',
     'rednose',

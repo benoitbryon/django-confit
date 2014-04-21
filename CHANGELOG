@@ -14,6 +14,9 @@ Demo project.
   and tests.
 - Feature #9 - Demo project shows how to register a custom configuration
   schema.
+- Feature #10 - Validate_settings() emits a warning if some directives used in
+  raw settings input are not in cleaned settings output. Helps figure out which
+  schemas are missing.
 
 
 0.1 (2014-04-21)
