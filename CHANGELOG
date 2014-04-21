@@ -15,7 +15,7 @@ Proof of concept.
 - Implemented configuration schema for Django 1.5.5 and Django 1.6.2.
 
 - Implemented configuration schema for some third-party libraries:
-  django-pipeline, django-debug-toolbar and raven.
+  django-pipeline, django-debug-toolbar, django-nose and raven.
 
 - Introduced configuration loading utilities.
 

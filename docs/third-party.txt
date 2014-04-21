@@ -6,6 +6,7 @@ Here is the list of configuration schemas implemented as part of
 `django-confit`. They are schemas that will automatically be loaded.
 
 * Django 1.5 and Django 1.6 are supported
-* django-pipeline
 * django-debug-toolbar
+* django-nose
+* django-pipeline
 * raven
