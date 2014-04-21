@@ -20,7 +20,8 @@ Prerequisites
 As a library
 ************
 
-In most cases, you will use `django-confit` as a dependency of another project.
+In most cases, you will use `django-confit` as a dependency of another project
+(typically a Django project or a Django application).
 In such a case, you should add ``django-confit`` in your main project's
 requirements. Typically in :file:`setup.py`:
 
@@ -37,7 +38,7 @@ requirements. Typically in :file:`setup.py`:
    )
 
 Then when you install your main project with your favorite package manager
-(like `pip`_), `django-confit` will automatically installed.
+(like `pip`_), `django-confit` will automatically be installed.
 
 
 **********

@@ -4,21 +4,30 @@ django-confit
 
 `django-confit` eases Django configuration management.
 
-As a Django user:
+**As a Django  user**, in order to configure a project:
 
-* you write the settings as you like: Python modules, environment variables,
-  JSON, YAML... `django-confit` helps you load them all.
+* `django-confit` helps you load the settings wherever they are, whatever the
+  format: Python modules, environment variables, JSON, YAML...
 
 * `django-confit` validates the settings, i.e. it tells you if some directive
   is missing, has wrong format...
 
-As a Django application developer:
+**As a Django library developer**, in order to help your application's users:
 
 * you write configuration schemas for your application, using `django-confit`'s
   toolkit and conventions.
 
 * `django-confit` helps you document your application's specific
   configuration.
+
+**As a non Django user**, in order to deploy and run a Django-powered project:
+
+* you write the configuration as you like, depending on your workflow and your
+  provisioning toolkit. You know the project can load them using
+  `django-confit`.
+
+* you expect applications to validate the configuration before they actually
+  use it, and report errors with a readable output.
 
 
 *******
