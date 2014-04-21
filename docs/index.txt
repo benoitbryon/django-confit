@@ -15,6 +15,7 @@ Contents
    validation
    schemas
    third-party
+   demo
    about/index
    contributing
 

@@ -8,7 +8,8 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Feature #7 - Code repository contains a demo project, used for documentation
+  and tests.
 
 
 0.1 (2014-04-21)
