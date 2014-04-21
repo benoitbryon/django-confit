@@ -10,6 +10,7 @@ Contents
    :titlesonly:
    
    install
+   configure
    loaders
    validation
    schemas

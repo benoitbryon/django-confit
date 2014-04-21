@@ -1,6 +1,4 @@
 """Schemas for configuration validation."""
-import os
-
 import django
 
 from django_confit.utils.importlib import import_member
@@ -33,53 +31,24 @@ def get_django_schema_class():
 DjangoConfigurationSchema = get_django_schema_class()
 
 
-def guess_project():
-    """Return project's package name, computed from DJANGO_SETTINGS_MODULE.
-
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
-    >>> guess_project()
-    'myproject'
-
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.demo.settings'
-    >>> guess_project()
-    'myproject.demo'
-
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-    >>> guess_project()
-    ''
-
-    """
-    parts = os.environ.get('DJANGO_SETTINGS_MODULE', '').split('.')
-    if parts:
-        parts.pop()
-        return '.'.join(parts)
-
-
-def composite_schema_class(installed_apps):
+def composite_schema_class(installed_apps, mapping={}):
     """Return colander schema class for current Django and installed apps.
 
-    Tries to automatically load schemas of applications either implemented by
-    project (local overrides), or by apps themselves, or by django_confit:
+    Tries to load schemas of applications as mentioned in ``mapping`` or
+    builtin django_confit:
 
-    1. ``<PROJECT>.settings_schemas.<APP>.ConfigurationSchema`` where
-       ``<PROJECT>`` is the package part of ``DJANGO_SETTINGS_MODULE``
-       environment variable.
+    1. ``mapping[<APP>]``
 
-    2. ``<APP>.settings_schemas.ConfigurationSchema``
-
-    3. ``django_confit.schemas.<APP>.ConfigurationSchema``
+    2. ``django_confit.schemas.<APP>.ConfigurationSchema``
 
     """
     bases = [DjangoConfigurationSchema]
-    project = guess_project()
     for app in installed_apps:
         locations = []
-        if project:
-            locations.append(
-                '{project}.settings_schemas.{app}.ConfigurationSchema'
-                .format(app=app, project=project))
-        locations.append(
-            '{app}.settings_schemas.ConfigurationSchema'.format(app=app))
+        try:
+            locations.append(mapping[app])
+        except KeyError:
+            pass
         locations.append(
             'django_confit.schemas.{app}.ConfigurationSchema'.format(app=app))
         for schema_path in locations:
@@ -92,9 +61,9 @@ def composite_schema_class(installed_apps):
     return type('CompositeConfigurationSchema', tuple(bases), {})
 
 
-def composite_schema(installed_apps):
+def composite_schema(installed_apps, mapping={}):
     """Return schema instance using ``installed_apps``."""
-    schema_class = composite_schema_class(installed_apps)
+    schema_class = composite_schema_class(installed_apps, mapping)
     return schema_class()
 
 
@@ -102,7 +71,10 @@ def validate_settings(raw_settings):
     """Return cleaned settings using schemas collected from INSTALLED_APPS."""
     # Perform early validation on Django's INSTALLED_APPS.
     installed_apps = raw_settings['INSTALLED_APPS']
+    schemas_mapping = raw_settings.get('CONFIT_SCHEMAS', {})
     # Create schema instance using INSTALLED_APPS.
-    settings_schema = composite_schema(installed_apps=installed_apps)
+    settings_schema = composite_schema(
+        installed_apps=installed_apps,
+        mapping=schemas_mapping)
     # Return cleaned settings.
     return settings_schema.deserialize(raw_settings)

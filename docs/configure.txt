@@ -1,0 +1,48 @@
+#########
+Configure
+#########
+
+Once `django-confit` is :doc:`installed <install>`, let's configure it.
+This section describes directives related to `django-confit` in your Django
+settings.
+
+
+**************
+CONFIT_SCHEMAS
+**************
+
+A dictionary of ``<APP>: <SCHEMA>`` where ``<APP>`` is in
+``INSTALLED_APPS`` and ``<SCHEMA>`` is the Python dotted path to a Schema class
+(or factory).
+
+This configuration directive is mandatory **only when** you need configuration
+schemas that are not builtin `django-confit`. See also :doc:`the list of
+builtin schemas <third-party>`.
+
+:func:`~django_confit.schemas.validate_settings` automatically loads schemas
+from ``INSTALLED_APPS`` setting. For each `<APP>` in ``INSTALLED_APPS``, it
+looks for:
+
+1. ``CONFIT_SCHEMAS[<APP>]``,
+2. ``django_confit.schemas.<APP>.ConfigurationSchema``.
+
+.. note::
+
+   Early versions of `django_confit` tried to automatically load schemas,
+   without having to register them:
+
+   1. ``settings_schemas.<APP>.ConfigurationSchema`` in current package, to
+      allow local overrides
+
+   2. ``<APP>.settings_schemas.ConfigurationSchema``, to allow third-party
+      applications to manage their own schema.
+
+   3. ``django_confit.schemas.<APP>.ConfigurationSchema`` to load
+      `django-confit`'s builtins.
+
+   The idea was nice. But it did not work. Because while trying to import
+   ``<APP>.settings_schemas.ConfigurationSchema``, if ``import <APP>`` imports
+   Django stuff, then a circular import can occur. That is a pain to debug and
+   a pain to fix.
+
+   With a registry, we import only things that are expected to work.

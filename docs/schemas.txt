@@ -12,29 +12,12 @@ about validation.
 schemas. You just want it loaded when you register the application in
 ``INSTALLED_APPS``.
 
-This sections explains how to create and register configuration schemas with
-`django-confit`.
+This sections explains how to create with `django-confit`.
 
 
 *******************************************
 Create settings_schemas.ConfigurationSchema
 *******************************************
-
-:func:`~django_confit.schemas.validate_settings` automatically loads schemas
-from ``INSTALLED_APPS`` setting. For each item in ``INSTALLED_APPS``, it tries
-to import:
-
-1. ``settings_schemas.<APP>.ConfigurationSchema`` in current package (allows
-   local overrides)
-
-2. ``<APP>.settings_schemas.ConfigurationSchema``
-
-3. ``django_confit.schemas.<APP>.ConfigurationSchema``
-
-
-******************************
-Create a schema using Colander
-******************************
 
 See:
 
@@ -60,6 +43,17 @@ See:
 
    * as an user, you do not have to find or write a schema for the application.
      There is an official one! You install the app, you get the schema!
+
+
+********************
+Register your schema
+********************
+
+In a project or a third-party application, register schemas in
+``settings.CONFIT_SCHEMAS``. See :doc:`configure`.
+
+In `django-confit` itself, make sure the schema can be loaded with
+``django_confit.schemas.<APP>.ConfigurationSchema``.
 
 
 .. rubric:: Notes & references
