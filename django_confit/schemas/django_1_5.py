@@ -138,7 +138,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
         )
         CACHE_MIDDLEWARE_ANONYMOUS_ONLY = colander.SchemaNode(
             colander.Boolean(),
-            missing=False,
+            missing=colander.drop,  # Not in django.conf.global_settings.
             default=False,
         )
         CACHE_MIDDLEWARE_KEY_PREFIX = colander.SchemaNode(
@@ -150,6 +150,11 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             colander.Integer(),
             missing=global_settings.CACHE_MIDDLEWARE_SECONDS,
             default=global_settings.CACHE_MIDDLEWARE_SECONDS,
+        )
+        COMMENTS_ALLOW_PROFANITIES = colander.SchemaNode(
+            colander.Boolean(),
+            missing=False,
+            default=False,
         )
         CSRF_COOKIE_DOMAIN = colander.SchemaNode(
             colander.String(),
@@ -186,64 +191,65 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
                     name='default',
                     missing=None,
                     children=[
+                        # See django.db.utils.ConnectionHandler.ensure_defaults
                         colander.SchemaNode(
                             colander.String(),
                             name='ENGINE',
-                            missing=colander.required,
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='HOST',
-                            missing='',
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='NAME',
-                            missing=colander.required,
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.Mapping(unknown='preserve'),
                             name='OPTIONS',
-                            missing={},
+                            missing=colander.drop,
                             default={},
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='PASSWORD',
-                            missing='',
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='PORT',
-                            missing='',
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='USER',
-                            missing='',
+                            missing=colander.drop,
                             default='',
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_CHARSET',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_COLLATION',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.Sequence(),
                             name='TEST_DEPENDENCIES',
-                            missing=['default'],
+                            missing=colander.drop,
                             default=['default'],
                             children=[
                                 colander.SchemaNode(colander.String()),
@@ -252,49 +258,49 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_MIRROR',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_NAME',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.Boolean(),
                             name='TEST_CREATE',
-                            missing=True,
+                            missing=colander.drop,
                             default=True,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_USER',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.Boolean(),
                             name='TEST_USER_CREATE',
-                            missing=True,
+                            missing=colander.drop,
                             default=True,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_PASSWD',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_TBLSPACE',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                         colander.SchemaNode(
                             colander.String(),
                             name='TEST_TBLSPACE_TMP',
-                            missing=None,
+                            missing=colander.drop,
                             default=None,
                         ),
                     ]
@@ -409,7 +415,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
         )
         EMAIL_FILE_PATH = colander.SchemaNode(
             colander.String(),
-            missing=None,
+            missing=colander.drop,
             default=colander.null,
         )
         EMAIL_HOST = colander.SchemaNode(
@@ -441,6 +447,11 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             colander.Boolean(),
             missing=global_settings.EMAIL_USE_TLS,
             default=global_settings.EMAIL_USE_TLS,
+        )
+        FORMAT_MODULE_PATH = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.FORMAT_MODULE_PATH,
+            default=global_settings.FORMAT_MODULE_PATH,
         )
         FILE_CHARSET = colander.SchemaNode(
             colander.String(),
@@ -542,6 +553,14 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
                 ),
             ]
         )
+        LANGUAGES_BIDI = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.LANGUAGES_BIDI,
+            default=global_settings.LANGUAGES_BIDI,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
+        )
         LOCALE_PATHS = colander.SchemaNode(
             colander.Sequence(),
             missing=global_settings.LOCALE_PATHS,
@@ -604,12 +623,17 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
         )
         MESSAGE_LEVEL = colander.SchemaNode(
             colander.Integer(),
-            missing=messages.INFO,
+            missing=colander.drop,  # Not in django.conf.global_settings
             default=messages.INFO,
+        )
+        MESSAGE_STORAGE = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.MESSAGE_STORAGE,
+            default=global_settings.MESSAGE_STORAGE,
         )
         MESSAGE_TAGS = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
-            missing=messages.DEFAULT_TAGS,
+            missing=colander.drop,  # Not in django.conf.global_settings
             default=messages.DEFAULT_TAGS,
             children=[
                 colander.SchemaNode(
@@ -667,12 +691,12 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
         )
         RESTRUCTUREDTEXT_FILTER_SETTINGS = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
-            missing={},
+            missing=colander.drop,  # Not in django.conf.global_settings
             default={},
         )
         ROOT_URLCONF = colander.SchemaNode(
             colander.String(),
-            missing=colander.required,
+            missing=colander.drop,  # Not in django.conf.global_settings
             default=colander.null,
         )
         SECRET_KEY = colander.SchemaNode(
@@ -798,6 +822,22 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
             colander.String(),
             missing=global_settings.STATIC_URL,
             default=global_settings.STATIC_URL,
+        )
+        STATICFILES_DIRS = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.STATICFILES_DIRS,
+            default=global_settings.STATICFILES_DIRS,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
+        )
+        STATICFILES_FINDERS = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.STATICFILES_FINDERS,
+            default=global_settings.STATICFILES_FINDERS,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
         )
         STATICFILES_STORAGE = colander.SchemaNode(
             colander.String(),
