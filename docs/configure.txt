@@ -26,6 +26,12 @@ looks for:
 1. ``CONFIT_SCHEMAS[<APP>]``,
 2. ``django_confit.schemas.<APP>.ConfigurationSchema``.
 
+Simple example from `default settings in django-confit demo project`_:
+
+.. literalinclude:: /../demo/django_confit_demo/default_settings.py
+   :language: python
+   :lines: 2-5
+
 .. note::
 
    Early versions of `django_confit` tried to automatically load schemas,
@@ -46,3 +52,11 @@ looks for:
    a pain to fix.
 
    With a registry, we import only things that are expected to work.
+
+
+.. rubric:: Notes & references
+
+.. target-notes::
+
+.. _`default settings in django-confit demo project`:
+   https://github.com/benoitbryon/django-confit/tree/master/demo/django_confit_demo/default_settings.py
