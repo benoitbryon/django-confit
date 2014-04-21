@@ -415,7 +415,7 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 5:
         )
         EMAIL_FILE_PATH = colander.SchemaNode(
             colander.String(),
-            missing=colander.drop,
+            missing=colander.drop,  # Not in djanco.conf.globalsettings
             default=colander.null,
         )
         EMAIL_HOST = colander.SchemaNode(

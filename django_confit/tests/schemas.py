@@ -35,7 +35,7 @@ class DjangoConfigurationSchemaTestCase(unittest.TestCase):
         """Django settings and DjangoConfigurationSchema have the same keys."""
         django_defaults = django_confit.load_module(
             'django.conf.global_settings')
-        django_keys = django_defaults.keys()
+        django_keys = list(django_defaults.keys())
         django_keys.sort()
         raw_settings = {  # Minimal settings for validation.
             'DATABASES': {},
@@ -43,7 +43,7 @@ class DjangoConfigurationSchemaTestCase(unittest.TestCase):
             'SECRET_KEY': '42',
         }
         confit_defaults = django_confit.validate_settings(raw_settings)
-        confit_keys = confit_defaults.keys()
+        confit_keys = list(confit_defaults.keys())
         confit_keys.sort()
         diff = difflib.unified_diff(django_keys, confit_keys)
         self.assertEqual(
