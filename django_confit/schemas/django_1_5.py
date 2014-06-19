@@ -1,7 +1,7 @@
 """Configuration schemas for the 1.5 branch."""
 import django
 
-from django_confit.schemas.django_x import DjangoConfigurationSchema
+from django_confit.schemas.django_common import DjangoConfigurationSchema
 
 
 if django.VERSION[0] == 1 and django.VERSION[1] == 5:
