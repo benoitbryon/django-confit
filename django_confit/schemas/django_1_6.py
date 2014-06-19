@@ -1,6 +1,5 @@
 """Configuration schemas for the 1.6 branch."""
 import django
-
 from django.conf import global_settings
 
 import colander
@@ -29,6 +28,11 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 6:
             colander.Boolean(),
             missing=global_settings.SEND_BROKEN_LINK_EMAILS,
             default=global_settings.SEND_BROKEN_LINK_EMAILS,
+        )
+        SESSION_SERIALIZER = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.SESSION_SERIALIZER,
+            default=global_settings.SESSION_SERIALIZER,
         )
 
         def __init__(self, *args, **kwargs):
