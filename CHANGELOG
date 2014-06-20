@@ -8,7 +8,8 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Feature #13 - Extended support for Django from 1.5 to 1.5.8 and from 1.6 to
+  1.6.5.
 
 
 0.1 (2014-04-21)
