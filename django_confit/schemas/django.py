@@ -1,4 +1,7 @@
-"""Configuration schemas for the 1.x branch."""
+"""Configuration schemas for Django."""
+from __future__ import absolute_import
+
+import django
 from django.conf import global_settings
 from django.contrib import messages
 
@@ -7,8 +10,18 @@ import colander
 from django_confit.utils.colander import TupleOrNone
 
 
-class DjangoConfigurationSchema(colander.MappingSchema):
-    """Schema for Django 1.5 built-in settings."""
+class DjangoBaseConfigurationSchema(colander.MappingSchema):
+    """Base schema for Django common settings.
+
+    Currently based on Django version 1.5.
+
+    Only settings that remain in all supported versions are listed here.
+    Settings that have been updated or removed are managed in "migrations"
+    (patches).
+
+    This base class helps keeping as DRY as possible.
+
+    """
     ABSOLUTE_URL_OVERRIDES = colander.SchemaNode(
         colander.Mapping(unknown='preserve'),
         missing=global_settings.ABSOLUTE_URL_OVERRIDES,
@@ -954,3 +967,120 @@ class DjangoConfigurationSchema(colander.MappingSchema):
         missing=global_settings.X_FRAME_OPTIONS,
         default=global_settings.X_FRAME_OPTIONS,
     )
+
+
+class Django1_5ConfigurationSchema(DjangoBaseConfigurationSchema):
+    """Configuration schema for Django 1.5."""
+
+
+class Django1_5_1ConfigurationSchema(Django1_5ConfigurationSchema):
+    """Configuration schema for Django 1.5.1."""
+
+
+class Django1_5_2ConfigurationSchema(Django1_5_1ConfigurationSchema):
+    """Configuration schema for Django 1.5.2."""
+
+
+class Django1_5_3ConfigurationSchema(Django1_5_2ConfigurationSchema):
+    """Configuration schema for Django 1.5.3."""
+    SESSION_SERIALIZER = colander.SchemaNode(
+        colander.String(),
+        missing=global_settings.SESSION_SERIALIZER,
+        default=global_settings.SESSION_SERIALIZER,
+    )
+
+
+class Django1_5_4ConfigurationSchema(Django1_5_3ConfigurationSchema):
+    """Configuration schema for Django 1.5.4."""
+
+
+class Django1_5_5ConfigurationSchema(Django1_5_4ConfigurationSchema):
+    """Configuration schema for Django 1.5.5."""
+
+
+class Django1_5_6ConfigurationSchema(Django1_5_5ConfigurationSchema):
+    """Configuration schema for Django 1.5.6."""
+    pass
+
+
+class Django1_5_7ConfigurationSchema(Django1_5_6ConfigurationSchema):
+    """Configuration schema for Django 1.5.7."""
+    pass
+
+
+class Django1_5_8ConfigurationSchema(Django1_5_7ConfigurationSchema):
+    """Configuration schema for Django 1.5.8."""
+    pass
+
+
+if django.VERSION[0] == 1 and django.VERSION[1] == 6:
+    # Some default values taken from ``global_settings`` are not available in
+    # Django 1.5, so we cannot run the code below in versions lower than 1.6.
+    class Django1_6ConfigurationSchema(Django1_5_5ConfigurationSchema):
+        """Configuration schema for Django 1.6."""
+        CSRF_COOKIE_HTTPONLY = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.CSRF_COOKIE_HTTPONLY,
+            default=global_settings.CSRF_COOKIE_HTTPONLY,
+        )
+        CACHE_MIDDLEWARE_ANONYMOUS_ONLY = colander.SchemaNode(
+            colander.Boolean(),
+            missing=colander.drop,  # Not in django.conf.global_settings.
+            default=False,
+        )
+        SEND_BROKEN_LINK_EMAILS = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.SEND_BROKEN_LINK_EMAILS,
+            default=global_settings.SEND_BROKEN_LINK_EMAILS,
+        )
+
+        def __init__(self, *args, **kwargs):
+            """Overrides default config by adding new nodes only."""
+            # Inherit from base schema.
+            super(Django1_6ConfigurationSchema, self).__init__(*args, **kwargs)
+
+            # Migrate from previous version.
+
+            # New nodes to add to db default config.
+            databases_default_nodes = [
+                colander.SchemaNode(
+                    colander.Boolean(),
+                    name='ATOMIC_REQUESTS',
+                    missing=colander.drop,
+                    default=False,
+                ),
+                colander.SchemaNode(
+                    colander.Boolean(),
+                    name='AUTOCOMMIT',
+                    missing=colander.drop,
+                    default=True,
+                ),
+                colander.SchemaNode(
+                    colander.Integer(),
+                    name='CONN_MAX_AGE',
+                    missing=colander.drop,
+                    default=0,
+                ),
+            ]
+
+            # Shortcut to db default config to update
+            databases_default = self.get('DATABASES').get('default')
+
+            # Add nodes
+            for node in databases_default_nodes:
+                databases_default.add(node)
+
+    class Django1_6_1ConfigurationSchema(Django1_6ConfigurationSchema):
+        """Configuration schema for Django 1.6.1."""
+
+    class Django1_6_2ConfigurationSchema(Django1_6_1ConfigurationSchema):
+        """Configuration schema for Django 1.6.2."""
+
+    class Django1_6_3ConfigurationSchema(Django1_6_2ConfigurationSchema):
+        """Configuration schema for Django 1.6.3."""
+
+    class Django1_6_4ConfigurationSchema(Django1_6_3ConfigurationSchema):
+        """Configuration schema for Django 1.6.4."""
+
+    class Django1_6_5ConfigurationSchema(Django1_6_4ConfigurationSchema):
+        """Configuration schema for Django 1.6.5."""
