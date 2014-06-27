@@ -23,3 +23,8 @@ class ConfigurationSchema(colander.MappingSchema):
         missing=colander.required,
         default='',
     )
+    PIMPMYTHEME_GIT_REPOSITORY = colander.SchemaNode(
+        colander.String(),
+        missing=colander.drop,
+        default=colander.null,
+    )
