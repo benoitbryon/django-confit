@@ -8,5 +8,6 @@ Here is the list of configuration schemas implemented as part of
 * Django 1.5 and Django 1.6 are supported
 * django-debug-toolbar
 * django-nose
+* django-pimpmytheme
 * django-pipeline
 * raven
