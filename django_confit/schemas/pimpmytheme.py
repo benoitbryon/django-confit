@@ -5,7 +5,7 @@ import colander
 class ConfigurationSchema(colander.MappingSchema):
     """Configuration schema for django-pimpmytheme.
 
-    Reference is https://github.com/novapost/django-pimpmytheme
+    Reference is https://pypi.python.org/pypi/django-pimpmytheme
 
     """
     CUSTOM_THEME_LOOKUP_OBJECT = colander.SchemaNode(
