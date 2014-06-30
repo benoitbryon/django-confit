@@ -13,6 +13,10 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 
 - Feature #16 - Added schema for django-pimpmytheme settings.
 
+- Bug #15 - DjangoSettingsSchema.TEMPLATE_LOADERS now accepts either strings or
+  tuples (was "accepts only strings"), as specified in Django's settings
+  reference documentation.
+
 
 0.1 (2014-04-21)
 ----------------

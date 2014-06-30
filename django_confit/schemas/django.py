@@ -877,7 +877,7 @@ class DjangoBaseConfigurationSchema(colander.MappingSchema):
         ]
     )
     TEMPLATE_LOADERS = colander.SchemaNode(
-        colander.Sequence(),
+        colander.List(),
         missing=global_settings.TEMPLATE_LOADERS,
         default=global_settings.TEMPLATE_LOADERS,
         children=[
