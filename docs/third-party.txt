@@ -5,8 +5,32 @@ Builtin schemas
 Here is the list of configuration schemas implemented as part of
 `django-confit`. They are schemas that will automatically be loaded.
 
-* Django 1.5 and Django 1.6 are supported
-* django-debug-toolbar
-* django-nose
-* django-pipeline
-* raven
+* `Django 1.5`_ and `Django 1.6`_ are supported
+* `django-debug-toolbar`_
+* `django-nose`_
+* `django-pimpmytheme`_
+* `django-pipeline`_
+* `raven`_
+
+.. note::
+
+   Maintaining schemas for third-party applications is hard! Any help would be
+   welcome, as an example:
+
+   * report bugs ;
+   * improve existing schemas (smarter validation) ;
+   * watch upgrades, support several versions.
+
+   If you are a library developer and you like `django-confit`, the best thing
+   you can do is to distribute your app's schema inside your app! So that
+   you maintain the schema along with your application, and `django-confit`
+   does not have to deal with multiple versions (given a version of your app,
+   there is only one valid schema for your app, and it lives within your app).
+
+.. _`Django 1.5`: https://docs.djangoproject.com/en/1.5/ref/settings/
+.. _`Django 1.6`: https://docs.djangoproject.com/en/1.6/ref/settings/
+.. _`django-debug-toolbar`: http://django-debug-toolbar.readthedocs.org/en/latest/configuration.html
+.. _`django-nose`: https://pypi.python.org/pypi/django-nose/
+.. _`django-pimpmytheme`: https://pypi.python.org/pypi/django-pimpmytheme/
+.. _`django-pipeline`: http://django-pipeline.readthedocs.org/en/latest/configuration.html
+.. _`raven`: http://raven.readthedocs.org/en/latest/config/django.html
