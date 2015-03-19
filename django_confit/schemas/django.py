@@ -1084,3 +1084,21 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 6:
 
     class Django1_6_5ConfigurationSchema(Django1_6_4ConfigurationSchema):
         """Configuration schema for Django 1.6.5."""
+
+    class Django1_6_6ConfigurationSchema(Django1_6_5ConfigurationSchema):
+        """Configuration schema for Django 1.6.6."""
+
+    class Django1_6_7ConfigurationSchema(Django1_6_6ConfigurationSchema):
+        """Configuration schema for Django 1.6.7."""
+
+    class Django1_6_8ConfigurationSchema(Django1_6_7ConfigurationSchema):
+        """Configuration schema for Django 1.6.8."""
+
+    class Django1_6_9ConfigurationSchema(Django1_6_8ConfigurationSchema):
+        """Configuration schema for Django 1.6.9."""
+
+    class Django1_6_10ConfigurationSchema(Django1_6_9ConfigurationSchema):
+        """Configuration schema for Django 1.6.10."""
+
+    class Django1_6_11ConfigurationSchema(Django1_6_10ConfigurationSchema):
+        """Configuration schema for Django 1.6.11."""
