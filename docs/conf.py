@@ -53,10 +53,10 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'django-confit'
-project_slug = re.sub(r'([\w_.-]+)', u'-', project)
+project_slug = re.sub(r'([\W_.-]+)', u'-', project)
 copyright = u'2014 - Benoît Bryon'
 author = u'Benoit Bryon'
-author_slug = re.sub(r'([\w_.-]+)', u'-', author)
+author_slug = re.sub(r'([\W_.-]+)', u'-', author)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -194,8 +194,8 @@ intersphinx_mapping = {
         'http://docs.python.org/2.7',
         None),
     'django': (
-        'http://docs.djangoproject.com/en/1.5/',
-        'http://docs.djangoproject.com/en/1.5/_objects/'),
+        'http://docs.djangoproject.com/en/1.6/',
+        'http://docs.djangoproject.com/en/1.6/_objects/'),
     'colander': (
         'http://docs.pylonsproject.org/projects/colander/en/latest/',
         None),
