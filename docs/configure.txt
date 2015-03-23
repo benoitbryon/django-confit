@@ -59,4 +59,4 @@ Simple example from `default settings in django-confit demo project`_:
 .. target-notes::
 
 .. _`default settings in django-confit demo project`:
-   https://github.com/benoitbryon/django-confit/tree/master/demo/django_confit_demo/default_settings.py
+   https://github.com/benoitbryon/django-confit/blob/master/demo/django_confit_demo/default_settings.py

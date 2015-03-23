@@ -1,7 +1,9 @@
 # Reference card for usual actions in development environment.
 #
 # For standard installation of django-confit as a library, see INSTALL.
-# For details about django-confit's development environment, see CONTRIBUTING.rst.
+#
+# For details about django-confit's development environment, see
+# CONTRIBUTING.rst.
 #
 PIP = pip
 TOX = tox

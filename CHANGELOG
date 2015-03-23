@@ -8,7 +8,11 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+Upgrades: Django and Sphinx.
+
+- Feature #26 - Added support for Django up to versions 1.5.12 and 1.6.11.
+
+- Bug #25 - Fixed support of latest Sphinx version.
 
 
 0.2 (2014-06-30)
@@ -53,4 +57,4 @@ Proof of concept.
 
 .. target-notes::
 
-.. _`milestones`: https://github.com/benoitbryon/django-confit/issues/milestones
+.. _`milestones`: https://github.com/benoitbryon/django-confit/milestones

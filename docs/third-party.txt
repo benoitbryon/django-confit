@@ -33,4 +33,4 @@ Here is the list of configuration schemas implemented as part of
 .. _`django-nose`: https://pypi.python.org/pypi/django-nose/
 .. _`django-pimpmytheme`: https://pypi.python.org/pypi/django-pimpmytheme/
 .. _`django-pipeline`: http://django-pipeline.readthedocs.org/en/latest/configuration.html
-.. _`raven`: http://raven.readthedocs.org/en/latest/config/django.html
+.. _`raven`: http://raven.readthedocs.org/en/latest/integrations/django.html

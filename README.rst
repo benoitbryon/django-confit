@@ -106,7 +106,7 @@ Ressources
 * Code repository: https://github.com/benoitbryon/django-confit
 * Bugtracker: https://github.com/benoitbryon/django-confit/issues
 * Continuous integration: https://travis-ci.org/benoitbryon/django-confit
-* Roadmap: https://github.com/benoitbryon/django-confit/issues/milestones
+* Roadmap: https://github.com/benoitbryon/django-confit/milestones
 
 
 .. _`colander`: https://pypi.python.org/pypi/colander/
