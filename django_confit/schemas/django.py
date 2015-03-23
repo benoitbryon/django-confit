@@ -1013,6 +1013,26 @@ class Django1_5_8ConfigurationSchema(Django1_5_7ConfigurationSchema):
     pass
 
 
+class Django1_5_9ConfigurationSchema(Django1_5_8ConfigurationSchema):
+    """Configuration schema for Django 1.5.9."""
+    pass
+
+
+class Django1_5_10ConfigurationSchema(Django1_5_9ConfigurationSchema):
+    """Configuration schema for Django 1.5.10."""
+    pass
+
+
+class Django1_5_11ConfigurationSchema(Django1_5_10ConfigurationSchema):
+    """Configuration schema for Django 1.5.11."""
+    pass
+
+
+class Django1_5_12ConfigurationSchema(Django1_5_11ConfigurationSchema):
+    """Configuration schema for Django 1.5.12."""
+    pass
+
+
 if django.VERSION[0] == 1 and django.VERSION[1] == 6:
     # Some default values taken from ``global_settings`` are not available in
     # Django 1.5, so we cannot run the code below in versions lower than 1.6.
@@ -1084,3 +1104,21 @@ if django.VERSION[0] == 1 and django.VERSION[1] == 6:
 
     class Django1_6_5ConfigurationSchema(Django1_6_4ConfigurationSchema):
         """Configuration schema for Django 1.6.5."""
+
+    class Django1_6_6ConfigurationSchema(Django1_6_5ConfigurationSchema):
+        """Configuration schema for Django 1.6.6."""
+
+    class Django1_6_7ConfigurationSchema(Django1_6_6ConfigurationSchema):
+        """Configuration schema for Django 1.6.7."""
+
+    class Django1_6_8ConfigurationSchema(Django1_6_7ConfigurationSchema):
+        """Configuration schema for Django 1.6.8."""
+
+    class Django1_6_9ConfigurationSchema(Django1_6_8ConfigurationSchema):
+        """Configuration schema for Django 1.6.9."""
+
+    class Django1_6_10ConfigurationSchema(Django1_6_9ConfigurationSchema):
+        """Configuration schema for Django 1.6.10."""
+
+    class Django1_6_11ConfigurationSchema(Django1_6_10ConfigurationSchema):
+        """Configuration schema for Django 1.6.11."""
