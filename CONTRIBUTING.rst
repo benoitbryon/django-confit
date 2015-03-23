@@ -77,7 +77,7 @@ See also ``make help``.
 .. target-notes::
 
 .. _`django-confit bugtracker`: https://github.com/benoitbryon/django-confit/issues
-.. _`rebase`: http://git-scm.com/book/en/Git-Branching-Rebasing
+.. _`rebase`: http://git-scm.com/book/en/v2/Git-Branching-Rebasing
 .. _`merge-based rebase`: http://tech.novapost.fr/psycho-rebasing-en.html
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`tox`: https://pypi.python.org/pypi/tox/

@@ -23,6 +23,7 @@ def load_mapping(input, prefix=''):
 
     Of course, both flat and nested mappings are supported:
 
+    >>> from django_confit import load_mapping
     >>> flat_mapping = {'DEBUG': 'True', 'SECRET_KEY': 'not a secret'}
     >>> output = load_mapping(flat_mapping)
     >>> output == flat_mapping
@@ -69,6 +70,7 @@ def load_file(file_obj):
     Supported file formats are JSON and YAML. The lowercase extension is used
     to guess the file type.
 
+    >>> from django_confit import load_file
     >>> from six.moves import StringIO
     >>> file_obj = StringIO('SOME_LIST: [a, b, c]')
     >>> file_obj.name = 'something.yaml'
@@ -94,6 +96,7 @@ def load_file(file_obj):
 def load_module(module_path):
     """Return module's globals as a dict.
 
+    >>> from django_confit import load_module
     >>> settings = load_module('django.conf.global_settings')
     >>> settings['DATABASES']
     {}

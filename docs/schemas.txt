@@ -69,4 +69,4 @@ In `django-confit` itself, make sure the schema can be loaded with
 .. _`django-confit's builtin schemas`:
    https://github.com/benoitbryon/django-confit/tree/master/django_confit/schemas 
 .. _`custom schemas in django-confit demo project`:
-   https://github.com/benoitbryon/django-confit/tree/master/demo/django_confit_demo/settings_schemas.py 
+   https://github.com/benoitbryon/django-confit/blob/master/demo/django_confit_demo/settings_schemas.py
