@@ -5,7 +5,7 @@ This document describes changes between past releases. For information about
 future releases, check `milestones`_ and :doc:`/about/vision`.
 
 
-0.4 (unreleased)
+0.4 (2015-12-11)
 ----------------
 
 - Bug #28 - Configuration loaders work with unsupported versions, whereas
