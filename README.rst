@@ -35,7 +35,7 @@ Example
 *******
 
 In a project's ``settings.py`` file, let's load configuration from various
-locations, then validate it:
+locations:
 
 .. code-block:: python
 
@@ -49,11 +49,20 @@ locations, then validate it:
    raw_settings.update(django_confit.load_file(open('/etc/myproject.json')))
    raw_settings.update(django_confit.load_mapping(os.environ, prefix='MYPROJECT_')
 
+   # Update globals, because that's the way Django uses DJANGO_SETTINGS_MODULE.
+   globals().update(raw_settings)
+
+Optionally, you can use builtin schemas to validate settings:
+
+.. code-block:: python
+
    # Validate and clean settings.
    cleaned_settings = django_confit.validate_settings(raw_settings)
 
    # Update globals, because that's the way Django uses DJANGO_SETTINGS_MODULE.
    globals().update(cleaned_settings)
+
+.. warning:: At the moment, there is no builtin schema for latest Django>=1.7.
 
 
 **************
@@ -71,12 +80,13 @@ Today, `django-confit` is a proof of concept:
 
 * generating documentation from schemas is not implemented.
 
-**The main limitation is that schemas are mandatory.** If some configuration
-directive is not registered in a schema, it will not be present in validation
-output. It means that, if you install a new third-party Django application,
-you need the configuration schema for this application, else its settings will
-not pass validation. **So the most-wanted contribution is submitting
-configuration schemas for third-party applications.**
+**The main limitation is that, when you use validation, schemas are
+mandatory.** If some configuration directive is not registered in a schema, it
+will not be present in validation output. It means that, if you install a new
+third-party Django application, you need the configuration schema for this
+application, else its settings will not pass validation. **So the most-wanted
+contribution is submitting configuration schemas for third-party
+applications.**
 
 Notice that this behaviour is a wanted feature. As `django-confit` author, I
 think **libraries should always provide a schema for the settings they use**.

@@ -52,7 +52,7 @@ KEYWORDS = [
 PACKAGES = [NAME.replace('-', '_')]
 REQUIREMENTS = [
     'colander',
-    'Django>=1.5,<1.7',
+    'Django>=1.5',
     'PyYAML',
     'setuptools',
     'six',

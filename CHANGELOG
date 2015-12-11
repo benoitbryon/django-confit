@@ -8,7 +8,8 @@ future releases, check `milestones`_ and :doc:`/about/vision`.
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Bug #28 - Configuration loaders work with unsupported versions, whereas
+  validation doesn't (was requiring supported versions of Django).
 
 
 0.3 (2015-03-23)
