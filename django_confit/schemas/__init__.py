@@ -10,7 +10,7 @@ from django_confit.utils.importlib import import_member
 def get_django_schema_class():
     """Return colander schema class for current (installed) Django version."""
     schema_import_path = \
-        'django_confit.schemas.django' \
+        'django_confit.schemas.django.django_{major}_{minor}' \
         '.Django{major}_{minor}_{micro}ConfigurationSchema' \
         .format(
             major=django.VERSION[0],

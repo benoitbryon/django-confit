@@ -1,0 +1,1 @@
+"""Configuration schemas for Django."""
