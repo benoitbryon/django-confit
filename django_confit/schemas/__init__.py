@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 import warnings
 
-import django
+import django as django_lib
 
 from django_confit.utils.importlib import import_member
 
@@ -10,22 +10,22 @@ from django_confit.utils.importlib import import_member
 def get_django_schema_class():
     """Return colander schema class for current (installed) Django version."""
     schema_import_path = \
-        'django_confit.schemas.django' \
+        'django_confit.schemas.django.django_{major}_{minor}' \
         '.Django{major}_{minor}_{micro}ConfigurationSchema' \
         .format(
-            major=django.VERSION[0],
-            minor=django.VERSION[1],
-            micro=django.VERSION[2])
+            major=django_lib.VERSION[0],
+            minor=django_lib.VERSION[1],
+            micro=django_lib.VERSION[2])
     try:
         return import_member(schema_import_path)
     except ImportError as e:
         raise ImportError(
             'Could not import "{schema_path}". '
-            'Django version {version} is not supported by django_confit. \n'
+            'Django version {version:s} is not supported by django_confit. \n'
             '{exception}'
             .format(
                 schema_path=schema_import_path,
-                version=django.get_version(),
+                version=django_lib.VERSION,
                 exception=e,
             )
         )

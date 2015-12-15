@@ -11,7 +11,7 @@ class TestSettings(unittest.TestCase):
         # Local settings (JSON file).
         self.assertEqual(settings.SECRET_KEY, 'fake secret')
         # Test settings (YAML file).
-        self.assertTrue('--rednose' in settings.NOSE_ARGS)
+        self.assertTrue('--tests=django_confit_demo' in settings.NOSE_ARGS)
 
     def test_custom_schema(self):
         """Custom DjangoConfitDemoConfigurationSchema was loaded."""

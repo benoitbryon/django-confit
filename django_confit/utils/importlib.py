@@ -1,4 +1,5 @@
 """Import utilities."""
+from __future__ import absolute_import
 
 
 def import_member(import_string):
