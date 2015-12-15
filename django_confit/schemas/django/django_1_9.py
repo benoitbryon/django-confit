@@ -56,10 +56,10 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
             missing=global_settings.APPEND_SLASH,
             default=global_settings.APPEND_SLASH,
         )
-        AUTHENTICATION_BACKENDS = colander.SchemaNode(
+        AUTH_PASSWORD_VALIDATORS = colander.SchemaNode(
             colander.Sequence(),
-            missing=global_settings.AUTHENTICATION_BACKENDS,
-            default=global_settings.AUTHENTICATION_BACKENDS,
+            missing=global_settings.AUTH_PASSWORD_VALIDATORS,
+            default=global_settings.AUTH_PASSWORD_VALIDATORS,
             children=[
                 colander.SchemaNode(colander.String()),
             ]
@@ -68,6 +68,14 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
             colander.String(),
             missing=global_settings.AUTH_USER_MODEL,
             default=global_settings.AUTH_USER_MODEL,
+        )
+        AUTHENTICATION_BACKENDS = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.AUTHENTICATION_BACKENDS,
+            default=global_settings.AUTHENTICATION_BACKENDS,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
         )
         CACHES = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
@@ -180,6 +188,19 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
             missing=global_settings.CSRF_FAILURE_VIEW,
             default=global_settings.CSRF_FAILURE_VIEW,
         )
+        CSRF_HEADER_NAME = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.CSRF_HEADER_NAME,
+            default=global_settings.CSRF_HEADER_NAME,
+        )
+        CSRF_TRUSTED_ORIGINS = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.CSRF_HEADER_NAME,
+            default=global_settings.CSRF_HEADER_NAME,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
+        )
         DATABASES = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
             missing=colander.required,
@@ -252,9 +273,15 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
                             default=0,
                         ),
                         colander.SchemaNode(
+                            colander.String(),
+                            name='TIME_ZONE',
+                            missing=colander.drop,
+                            default=None,
+                        ),
+                        colander.SchemaNode(
                             colander.Mapping(unknown='raise'),
-                            name='default',
-                            missing=None,
+                            name='TEST',
+                            missing={},
                             children=[
                                 colander.SchemaNode(
                                     colander.String(),
@@ -1079,6 +1106,11 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
             colander.Boolean(),
             missing=global_settings.USE_X_FORWARDED_HOST,
             default=global_settings.USE_X_FORWARDED_HOST,
+        )
+        USE_X_FORWARDED_PORT = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.USE_X_FORWARDED_PORT,
+            default=global_settings.USE_X_FORWARDED_PORT,
         )
         WSGI_APPLICATION = colander.SchemaNode(
             colander.String(),

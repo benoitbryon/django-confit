@@ -1040,7 +1040,6 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             default=global_settings.X_FRAME_OPTIONS,
         )
 
-
     class Django1_7_1ConfigurationSchema(Django1_7ConfigurationSchema):
         """Configuration schema for Django 1.7.1."""
         DATABASES = colander.SchemaNode(
