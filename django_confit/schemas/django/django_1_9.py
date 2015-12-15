@@ -1,4 +1,4 @@
-"""Configuration schemas for Django 1.7 branch."""
+"""Configuration schemas for Django 1.9 branch."""
 from __future__ import absolute_import
 
 import django
@@ -10,21 +10,13 @@ import colander
 from django_confit.utils.colander import TupleOrNone
 
 
-if django.VERSION[0] is 1 and django.VERSION[1] is 7:
-    class Django1_7ConfigurationSchema(colander.MappingSchema):
-        """Configuration schema for Django 1.7."""
+if django.VERSION[0] is 1 and django.VERSION[1] is 9:
+    class Django1_9_0ConfigurationSchema(colander.MappingSchema):
+        """Configuration schema for Django 1.9."""
         ABSOLUTE_URL_OVERRIDES = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
             missing=global_settings.ABSOLUTE_URL_OVERRIDES,
             default=global_settings.ABSOLUTE_URL_OVERRIDES,
-        )
-        ADMIN_FOR = colander.SchemaNode(
-            colander.Sequence(),
-            missing=global_settings.ADMIN_FOR,
-            default=global_settings.ADMIN_FOR,
-            children=[
-                colander.SchemaNode(colander.String()),
-            ]
         )
         ADMINS = colander.SchemaNode(
             colander.Sequence(),
@@ -152,11 +144,6 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             colander.Integer(),
             missing=global_settings.CACHE_MIDDLEWARE_SECONDS,
             default=global_settings.CACHE_MIDDLEWARE_SECONDS,
-        )
-        COMMENTS_ALLOW_PROFANITIES = colander.SchemaNode(
-            colander.Boolean(),
-            missing=False,
-            default=False,
         )
         CSRF_COOKIE_AGE = colander.SchemaNode(
             colander.Integer(),
@@ -309,6 +296,12 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
                                     default=True,
                                 ),
                                 colander.SchemaNode(
+                                    colander.Boolean(),
+                                    name='SERIALIZE',
+                                    missing=colander.drop,
+                                    default=True,
+                                ),
+                                colander.SchemaNode(
                                     colander.String(),
                                     name='USER',
                                     missing=colander.drop,
@@ -335,6 +328,30 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
                                 colander.SchemaNode(
                                     colander.String(),
                                     name='TBLSPACE_TMP',
+                                    missing=colander.drop,
+                                    default=None,
+                                ),
+                                colander.SchemaNode(
+                                    colander.String(),
+                                    name='DATAFILE',
+                                    missing=colander.drop,
+                                    default=None,
+                                ),
+                                colander.SchemaNode(
+                                    colander.String(),
+                                    name='DATAFILE_TMP',
+                                    missing=colander.drop,
+                                    default=None,
+                                ),
+                                colander.SchemaNode(
+                                    colander.String(),
+                                    name='DATAFILE_MAXSIZE',
+                                    missing=colander.drop,
+                                    default=None,
+                                ),
+                                colander.SchemaNode(
+                                    colander.String(),
+                                    name='DATAFILE_TMP_MAXSIZE',
                                     missing=colander.drop,
                                     default=None,
                                 ),
@@ -479,6 +496,21 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             colander.String(),
             missing=global_settings.EMAIL_SUBJECT_PREFIX,
             default=global_settings.EMAIL_SUBJECT_PREFIX,
+        )
+        EMAIL_SSL_CERTFILE = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.EMAIL_SSL_CERTFILE,
+            default=global_settings.EMAIL_SSL_CERTFILE,
+        )
+        EMAIL_SSL_KEYFILE = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.EMAIL_SSL_KEYFILE,
+            default=global_settings.EMAIL_SSL_KEYFILE,
+        )
+        EMAIL_TIMEOUT = colander.SchemaNode(
+            colander.Integer(),
+            missing=global_settings.EMAIL_TIMEOUT,
+            default=global_settings.EMAIL_TIMEOUT,
         )
         EMAIL_USE_TLS = colander.SchemaNode(
             colander.Boolean(),
@@ -746,16 +778,6 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             missing=global_settings.PREPEND_WWW,
             default=global_settings.PREPEND_WWW,
         )
-        PROFANITIES_LIST = colander.SchemaNode(
-            colander.Sequence(),
-            missing=global_settings.PROFANITIES_LIST,
-            default=global_settings.PROFANITIES_LIST,
-            children=[
-                colander.SchemaNode(
-                    colander.String(),
-                ),
-            ]
-        )
         RESTRUCTUREDTEXT_FILTER_SETTINGS = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
             missing=colander.drop,  # Not in django.conf.global_settings
@@ -771,6 +793,34 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             missing=colander.required,
             default=colander.null,
         )
+        SECURE_BROWSER_XSS_FILTER = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.SECURE_BROWSER_XSS_FILTER,
+            default=global_settings.SECURE_BROWSER_XSS_FILTER,
+        )
+        SECURE_CONTENT_TYPE_NOSNIFF = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.SECURE_CONTENT_TYPE_NOSNIFF,
+            default=global_settings.SECURE_CONTENT_TYPE_NOSNIFF,
+        )
+        SECURE_HSTS_INCLUDE_SUBDOMAINS = colander.SchemaNode(
+            colander.Boolean(),
+            missing=global_settings.SECURE_HSTS_INCLUDE_SUBDOMAINS,
+            default=global_settings.SECURE_HSTS_INCLUDE_SUBDOMAINS,
+        )
+        SECURE_HSTS_SECONDS = colander.SchemaNode(
+            colander.Integer(),
+            missing=global_settings.SECURE_HSTS_SECONDS,
+            default=global_settings.SECURE_HSTS_SECONDS,
+        )
+        SECURE_REDIRECT_EXEMPT = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.SECURE_REDIRECT_EXEMPT,
+            default=global_settings.SECURE_REDIRECT_EXEMPT,
+            children=[
+                colander.SchemaNode(colander.String()),
+            ]
+        )
         SECURE_PROXY_SSL_HEADER = colander.SchemaNode(
             TupleOrNone(),
             missing=global_settings.SECURE_PROXY_SSL_HEADER,
@@ -780,10 +830,15 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
                 colander.SchemaNode(colander.String()),
             ]
         )
-        SEND_BROKEN_LINK_EMAILS = colander.SchemaNode(
+        SECURE_SSL_HOST = colander.SchemaNode(
+            colander.String(),
+            missing=global_settings.SECURE_SSL_HOST,
+            default=global_settings.SECURE_SSL_HOST,
+        )
+        SECURE_SSL_REDIRECT = colander.SchemaNode(
             colander.Boolean(),
-            missing=global_settings.SEND_BROKEN_LINK_EMAILS,
-            default=global_settings.SEND_BROKEN_LINK_EMAILS,
+            missing=global_settings.SECURE_SSL_REDIRECT,
+            default=global_settings.SECURE_SSL_REDIRECT,
         )
         SERIALIZATION_MODULES = colander.SchemaNode(
             colander.Mapping(unknown='preserve'),
@@ -953,6 +1008,12 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             missing=global_settings.TEMPLATE_STRING_IF_INVALID,
             default=global_settings.TEMPLATE_STRING_IF_INVALID,
         )
+        TEMPLATES = colander.SchemaNode(
+            colander.Sequence(),
+            missing=global_settings.TEMPLATES,
+            default=global_settings.TEMPLATES,
+            children=[]
+        )
         TEST_NON_SERIALIZED_APPS = colander.SchemaNode(
             colander.Sequence(),
             missing=global_settings.TEST_NON_SERIALIZED_APPS,
@@ -988,11 +1049,6 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             colander.String(),
             missing=global_settings.TIME_ZONE,
             default=global_settings.TIME_ZONE,
-        )
-        TRANSACTIONS_MANAGED = colander.SchemaNode(
-            colander.Boolean(),
-            missing=global_settings.TRANSACTIONS_MANAGED,
-            default=global_settings.TRANSACTIONS_MANAGED,
         )
         USE_ETAGS = colander.SchemaNode(
             colander.Boolean(),
@@ -1040,193 +1096,5 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 7:
             default=global_settings.X_FRAME_OPTIONS,
         )
 
-
-    class Django1_7_1ConfigurationSchema(Django1_7ConfigurationSchema):
-        """Configuration schema for Django 1.7.1."""
-        DATABASES = colander.SchemaNode(
-            colander.Mapping(unknown='preserve'),
-            missing=colander.required,
-            default=colander.null,
-            children=[
-                colander.SchemaNode(
-                    colander.Mapping(unknown='raise'),
-                    name='default',
-                    missing=None,
-                    children=[
-                        # See django.db.utils.ConnectionHandler.ensure_defaults
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='ENGINE',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='HOST',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='NAME',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.Mapping(unknown='preserve'),
-                            name='OPTIONS',
-                            missing=colander.drop,
-                            default={},
-                        ),
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='PASSWORD',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='PORT',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.String(),
-                            name='USER',
-                            missing=colander.drop,
-                            default='',
-                        ),
-                        colander.SchemaNode(
-                            colander.Boolean(),
-                            name='ATOMIC_REQUESTS',
-                            missing=colander.drop,
-                            default=False,
-                        ),
-                        colander.SchemaNode(
-                            colander.Boolean(),
-                            name='AUTOCOMMIT',
-                            missing=colander.drop,
-                            default=True,
-                        ),
-                        colander.SchemaNode(
-                            colander.Integer(),
-                            name='CONN_MAX_AGE',
-                            missing=colander.drop,
-                            default=0,
-                        ),
-                        colander.SchemaNode(
-                            colander.Mapping(unknown='raise'),
-                            name='default',
-                            missing=None,
-                            children=[
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='CHARSET',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='COLLATION',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.Sequence(),
-                                    name='DEPENDENCIES',
-                                    missing=colander.drop,
-                                    default=['default'],
-                                    children=[
-                                        colander.SchemaNode(colander.String()),
-                                    ]
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='MIRROR',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='NAME',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.Boolean(),
-                                    name='SERIALIZE',
-                                    missing=colander.drop,
-                                    default=True,
-                                ),
-                                colander.SchemaNode(
-                                    colander.Boolean(),
-                                    name='CREATE_DB',
-                                    missing=colander.drop,
-                                    default=True,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='USER',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.Boolean(),
-                                    name='CREATE_USER',
-                                    missing=colander.drop,
-                                    default=True,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='PASSWORD',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='TBLSPACE',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                                colander.SchemaNode(
-                                    colander.String(),
-                                    name='TBLSPACE_TMP',
-                                    missing=colander.drop,
-                                    default=None,
-                                ),
-                            ]
-                        ),
-                    ]
-                ),
-            ]
-        )
-
-    class Django1_7_2ConfigurationSchema(Django1_7_1ConfigurationSchema):
-        """Configuration schema for Django 1.7.2."""
-
-    class Django1_7_3ConfigurationSchema(Django1_7_2ConfigurationSchema):
-        """Configuration schema for Django 1.7.3."""
-
-    class Django1_7_4ConfigurationSchema(Django1_7_3ConfigurationSchema):
-        """Configuration schema for Django 1.7.4."""
-
-    class Django1_7_5ConfigurationSchema(Django1_7_4ConfigurationSchema):
-        """Configuration schema for Django 1.7.5."""
-
-    class Django1_7_6ConfigurationSchema(Django1_7_5ConfigurationSchema):
-        """Configuration schema for Django 1.7.6."""
-
-    class Django1_7_7ConfigurationSchema(Django1_7_6ConfigurationSchema):
-        """Configuration schema for Django 1.7.7."""
-
-    class Django1_7_8ConfigurationSchema(Django1_7_7ConfigurationSchema):
-        """Configuration schema for Django 1.7.8."""
-
-    class Django1_7_9ConfigurationSchema(Django1_7_8ConfigurationSchema):
-        """Configuration schema for Django 1.7.9."""
-
-    class Django1_7_10ConfigurationSchema(Django1_7_9ConfigurationSchema):
-        """Configuration schema for Django 1.7.10."""
-
-    class Django1_7_11ConfigurationSchema(Django1_7_10ConfigurationSchema):
-        """Configuration schema for Django 1.7.11."""
+    class Django1_9_1ConfigurationSchema(Django1_9_0ConfigurationSchema):
+        """Configuration schema for Django 1.9.1."""

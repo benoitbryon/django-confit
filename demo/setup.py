@@ -26,7 +26,6 @@ REQUIREMENTS = [
     'coverage',
     'django-confit',
     'django-nose',
-    'rednose',
 ]
 ENTRY_POINTS = {
     'console_scripts': ['django-confit-demo = django_confit_demo.manage:main']

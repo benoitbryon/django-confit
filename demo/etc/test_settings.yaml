@@ -1,6 +1,5 @@
 DEBUG: True
 NOSE_ARGS:
-  - "--rednose"
   - "--verbosity=2"
   - "--nocapture"
   - "--with-doctest"
