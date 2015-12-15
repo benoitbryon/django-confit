@@ -13,7 +13,13 @@ If you want to install a development environment, you should go to
 Prerequisites
 *************
 
-* `Python`_ 2.7, 3.3
+* `Python`_ 2.7, 3.3, 3.4, 3.5
+
+.. warning::
+
+   Django>=1.8 no longer supports Python 3.3, and Django<1.8 does not support
+   Python 3.5. As an example, `django-confit` can't work with Django 1.7 and
+   Python 3.5.
 
 
 ************
