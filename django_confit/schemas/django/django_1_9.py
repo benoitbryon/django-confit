@@ -1145,3 +1145,6 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
 
     class Django1_9_6ConfigurationSchema(Django1_9_5ConfigurationSchema):
         """Configuration schema for Django 1.9.6."""
+
+    class Django1_9_7ConfigurationSchema(Django1_9_6ConfigurationSchema):
+        """Configuration schema for Django 1.9.7."""
