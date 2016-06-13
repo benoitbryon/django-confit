@@ -109,7 +109,12 @@ def load_module(module_path):
 
     """
     module = __import__(module_path, fromlist='*', level=0)
-    is_uppercase = lambda x: x.upper() == x
-    is_special = lambda x: x.startswith('_')
+
+    def is_uppercase(value):
+        return value.upper() == value
+
+    def is_special(value):
+        return value.startswith('_')
+
     return dict([(key, value) for key, value in module.__dict__.items()
                  if is_uppercase(key) and not is_special(key)])

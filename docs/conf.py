@@ -81,8 +81,8 @@ intersphinx_mapping = {
         'http://docs.python.org/2.7',
         None),
     'django': (
-        'http://docs.djangoproject.com/en/1.6/',
-        'http://docs.djangoproject.com/en/1.6/_objects/'),
+        'http://docs.djangoproject.com/en/1.9/',
+        'http://docs.djangoproject.com/en/1.9/_objects/'),
     'colander': (
         'http://docs.pylonsproject.org/projects/colander/en/latest/',
         None),
