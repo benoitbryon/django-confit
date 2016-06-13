@@ -59,6 +59,8 @@ version = '.'.join(release.split('.')[0:1])
 # for a list of supported languages.
 language = 'en'
 
+linkcheck_timeout = 10
+
 
 # -- Options for HTML output --------------------------------------------------
 
