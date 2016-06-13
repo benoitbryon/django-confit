@@ -1119,3 +1119,18 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 8:
 
     class Django1_8_8ConfigurationSchema(Django1_8_7ConfigurationSchema):
         """Configuration schema for Django 1.8.8."""
+
+    class Django1_8_9ConfigurationSchema(Django1_8_8ConfigurationSchema):
+        """Configuration schema for Django 1.8.9."""
+
+    class Django1_8_10ConfigurationSchema(Django1_8_9ConfigurationSchema):
+        """Configuration schema for Django 1.8.10."""
+
+    class Django1_8_11ConfigurationSchema(Django1_8_10ConfigurationSchema):
+        """Configuration schema for Django 1.8.11."""
+
+    class Django1_8_12ConfigurationSchema(Django1_8_11ConfigurationSchema):
+        """Configuration schema for Django 1.8.12."""
+
+    class Django1_8_13ConfigurationSchema(Django1_8_12ConfigurationSchema):
+        """Configuration schema for Django 1.8.13."""

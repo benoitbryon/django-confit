@@ -1130,3 +1130,21 @@ if django.VERSION[0] is 1 and django.VERSION[1] is 9:
 
     class Django1_9_1ConfigurationSchema(Django1_9_0ConfigurationSchema):
         """Configuration schema for Django 1.9.1."""
+
+    class Django1_9_2ConfigurationSchema(Django1_9_1ConfigurationSchema):
+        """Configuration schema for Django 1.9.2."""
+
+    class Django1_9_3ConfigurationSchema(Django1_9_2ConfigurationSchema):
+        """Configuration schema for Django 1.9.3."""
+
+    class Django1_9_4ConfigurationSchema(Django1_9_3ConfigurationSchema):
+        """Configuration schema for Django 1.9.4."""
+
+    class Django1_9_5ConfigurationSchema(Django1_9_4ConfigurationSchema):
+        """Configuration schema for Django 1.9.5."""
+
+    class Django1_9_6ConfigurationSchema(Django1_9_5ConfigurationSchema):
+        """Configuration schema for Django 1.9.6."""
+
+    class Django1_9_7ConfigurationSchema(Django1_9_6ConfigurationSchema):
+        """Configuration schema for Django 1.9.7."""
